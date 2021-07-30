@@ -44,7 +44,8 @@ public class SeminarRegistrationController {
 			rb.setMessage("Registeration Successful");
 			SeminarRegistrationMailBean message = seminarMailDao.getMessage();
 			
-			String formattedMessage = java.text.MessageFormat.format(message.getBody(), user.getFirstName() +" "+ user.getLastName());
+			String formattedMessage = message.getBody().replaceAll("{0}", user.getFirstName() +" "+ user.getLastName());
+			
 			message.setBody(formattedMessage);		
 			emailService.sendRegisterationMail(user,message);
 			//whatsappService.sendRegisterationWhatsapp(user,message);
