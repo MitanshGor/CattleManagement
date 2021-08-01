@@ -178,8 +178,7 @@
 		</div>
 	</div>
 	<%@include file="AdminFooter.jsp"%>
-		<%@include file="SideBarActive.jsp" %>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="/resources/assets/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
     <script src="/resources/assets/vendor/datatables/js/buttons.bootstrap4.min.js"></script>

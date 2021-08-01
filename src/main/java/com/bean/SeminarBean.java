@@ -1,14 +1,12 @@
 package com.bean;
 
-import java.sql.Timestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.time.LocalDateTime;
 
-@Entity(name = "seminartable")
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class SeminarBean {
 	
-	@Id	
 	int seminarID;
 	
 	String seminarName;
@@ -16,10 +14,14 @@ public class SeminarBean {
 	
 	float seminarFees;
 	
-	Timestamp seminarStart;
-	Timestamp seminarEnd;
-	Timestamp seminarRegistrationStart;
-	Timestamp seminarRegistrationEnd;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	LocalDateTime seminarStart;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	LocalDateTime seminarEnd;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	LocalDateTime seminarRegistrationStart;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	LocalDateTime seminarRegistrationEnd;
 	boolean acceptingRegistration;
 	String seminarZoomLink;
 	String seminarDescription;
@@ -31,6 +33,10 @@ public class SeminarBean {
 	public String getImgPathGujarati() {
 		return imgPathGujarati;
 	}
+	
+	
+
+
 	public void setImgPathGujarati(String imgPathGujarati) {
 		this.imgPathGujarati = imgPathGujarati;
 	}
@@ -83,28 +89,29 @@ public class SeminarBean {
 	public void setSeminarFees(float seminarFees) {
 		this.seminarFees = seminarFees;
 	}
-	public Timestamp getSeminarStart() {
-		return seminarStart;
+	
+	public LocalDateTime getSeminarStart() {
+		return this.seminarStart;
 	}
-	public void setSeminarStart(Timestamp seminarStart) {
+	public void setSeminarStart(LocalDateTime seminarStart) {
 		this.seminarStart = seminarStart;
 	}
-	public Timestamp getSeminarEnd() {
+	public LocalDateTime getSeminarEnd() {
 		return seminarEnd;
 	}
-	public void setSeminarEnd(Timestamp seminarEnd) {
+	public void setSeminarEnd(LocalDateTime seminarEnd) {
 		this.seminarEnd = seminarEnd;
 	}
-	public Timestamp getSeminarRegistrationStart() {
+	public LocalDateTime getSeminarRegistrationStart() {
 		return seminarRegistrationStart;
 	}
-	public void setSeminarRegistrationStart(Timestamp seminarRegistrationStart) {
+	public void setSeminarRegistrationStart(LocalDateTime seminarRegistrationStart) {
 		this.seminarRegistrationStart = seminarRegistrationStart;
 	}
-	public Timestamp getSeminarRegistrationEnd() {
+	public LocalDateTime getSeminarRegistrationEnd() {
 		return seminarRegistrationEnd;
 	}
-	public void setSeminarRegistrationEnd(Timestamp seminarRegistrationEnd) {
+	public void setSeminarRegistrationEnd(LocalDateTime seminarRegistrationEnd) {
 		this.seminarRegistrationEnd = seminarRegistrationEnd;
 	}
 	public boolean isAcceptingRegistration() {

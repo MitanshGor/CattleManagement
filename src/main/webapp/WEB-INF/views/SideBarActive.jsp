@@ -62,7 +62,7 @@ $(document).ready(function(){
 			var a = document.getElementById("userManagment");
 			a.className = 'nav-link active'			
 		}
-		else if(ur.includes("/seminarManagement")){
+		else if(ur.includes("/seminarManagement") || ur.includes("/addSeminar") || ur.includes("/editSeminar") || ur.includes("/viewSeminar")){
 			var a = document.getElementById("seminarManagement");
 			a.className = 'nav-link active'			
 		}

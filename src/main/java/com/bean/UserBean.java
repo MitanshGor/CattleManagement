@@ -1,5 +1,7 @@
 package com.bean;
 
+import java.sql.Timestamp;
+
 public class UserBean {
 	
 	int userID;
@@ -8,6 +10,14 @@ public class UserBean {
 	String firstName;
 	String lastName;
 	String phoneNumber;
+	Timestamp createAt;
+	
+	public Timestamp getCreateAt() {
+		return createAt;
+	}
+	public void setCreateAt(Timestamp createAt) {
+		this.createAt = createAt;
+	}
 	public int getUserID() {
 		return userID;
 	}

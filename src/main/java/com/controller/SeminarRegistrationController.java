@@ -1,13 +1,19 @@
 package com.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bean.ResponseBean;
+import com.bean.ResponseBeanWithList;
+import com.bean.SeminarBean;
 import com.bean.SeminarRegistrationBean;
 import com.bean.SeminarRegistrationMailBean;
 import com.bean.UserBean;
+import com.dao.SeminarDao;
 import com.dao.SeminarRegistrationDao;
 import com.dao.SeminarRegistrationMailDao;
 import com.dao.UserDao;
@@ -25,6 +31,9 @@ public class SeminarRegistrationController {
 	
 	@Autowired
 	EmailService emailService;
+	
+	@Autowired
+	SeminarDao seminarDao;
 	
 	//@Autowired
 	//WhatsappService whatsappService;
@@ -53,6 +62,22 @@ public class SeminarRegistrationController {
 		}
 		else {
 			rb.setMessage("Registeration Unsuccessful");
+			rb.setStatus(-1);
+		}
+		return rb;
+	}
+	@GetMapping("/getActiveSeminarList")
+	public ResponseBeanWithList<SeminarBean> getActiveSemianrList(){
+		ResponseBeanWithList<SeminarBean> rb = new ResponseBeanWithList<SeminarBean>();
+		List<SeminarBean> data = seminarDao.getActiveSeminar(); 
+		if(data != null) {
+			rb.setMessage("Succesfully Fetched");
+			rb.setData(data);
+			rb.setStatus(200);
+		}
+		else {
+			rb.setMessage("Some Error Occured");
+			rb.setData(data);
 			rb.setStatus(-1);
 		}
 		return rb;
