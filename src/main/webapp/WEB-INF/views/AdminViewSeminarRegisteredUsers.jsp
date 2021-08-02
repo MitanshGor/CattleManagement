@@ -77,7 +77,7 @@
 										<c:forEach items="${registeredUsers}" var="a">
 											<tr>
 												<th>${a.userID }</th>
-												<th>${a.fistName}</th>
+												<th>${a.firstName}</th>
 												<th>${a.lastName}</th>
 												<th>${a.phoneNumber}</th>
 												<th>${a.emailID}</th>
