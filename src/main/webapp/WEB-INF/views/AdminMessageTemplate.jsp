@@ -71,11 +71,11 @@
 											placeholder at that place. (Property : Syntax To Be Used)</p>
 										<p class="text-danger">Place Holder are Case Sensitive and it should be written between the curly braces as shown below.</p>
 										<ul>
-											<li>Registered User Name : {user name}</li>
-											<li>Seminar Title : {seminar title}</li>
-											<li>Seminar Date and Time: {seminar date}</li>
-											<li>Seminar ID : {seminar id}</li>
-											<li>Whatsapp Group Link : {whatsapp link}</li>
+											<li>Registered User Name : %(user name)</li>
+											<li>Seminar Title : %(seminar title)</li>
+											<li>Seminar Date and Time: %(seminar date)</li>
+											<li>Seminar ID : %(seminar id)</li>
+											<li>Whatsapp Group Link : %(whatsapp link)</li>
 
 										</ul>
 
@@ -110,9 +110,9 @@
 											placeholder at that place. (Property : Syntax To Be Used)</p>
 										<p class="text-danger">Place Holder are Case Sensitive and it should be written between the curly braces as shown below.</p>
 										<ul>
-											<li>Registered User Name : {user name}</li>
-											<li>Counselling ID : {counselling id}</li>
-											<li>Counselling Date and Time: {counselling date}</li>
+											<li>Registered User Name : %(user name)</li>
+											<li>Counselling ID : %(counselling id)</li>
+											<li>Counselling Date and Time: %(counselling date)</li>
 										</ul>
 
 									</div>
@@ -147,9 +147,9 @@
 											placeholder at that place. (Property : Syntax To Be Used)</p>
 											<p class="text-danger">Place Holder are Case Sensitive and it should be written between the curly braces as shown below.</p>
 										<ul>
-											<li>Registered User Name : {user name}</li>
-											<li>Counselling ID : {counselling id}</li>
-											<li>Counselling Date and Time: {counselling date}</li>
+											<li>Registered User Name : %(user name)</li>
+											<li>Counselling ID : %(counselling id)</li>
+											<li>Counselling Date and Time: %(counselling date)</li>
 										</ul>
 
 									</div>

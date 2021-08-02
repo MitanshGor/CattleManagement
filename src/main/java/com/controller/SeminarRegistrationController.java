@@ -55,8 +55,8 @@ public class SeminarRegistrationController {
 			registerBean.setUserID(user.getUserID());
 			SeminarBean seminar = seminarDao.getSeminarByID(registerBean.getSeminarID());			
 			if (seminarRegisterDao.checkIfUserIsRegistered(registerBean.getUserID(), registerBean.getSeminarID())) {
-				//int r = seminarRegisterDao.registerSeminar(registerBean);
-				int  r =1;
+				int r = seminarRegisterDao.registerSeminar(registerBean);
+				//int  r =1;
 				rb.setData(registerBean);
 				if (r == 1) {
 					rb.setMessage("Registeration Successful");
