@@ -43,25 +43,28 @@ public class SeminarRegistrationController {
 
 	@PostMapping("/registerSeminar")
 	public ResponseBean<SeminarRegistrationBean> registerSeminar(SeminarRegistrationBean registerBean){
-		
 		ResponseBean<SeminarRegistrationBean> rb = new ResponseBean<SeminarRegistrationBean>(); 
 		UserBean user = userDao.getUserByEmailID(registerBean.getEmailID());
 		registerBean.setUserID(user.getUserID());
-		int r = seminarRegisterDao.registerSeminar(registerBean);
-		rb.setData(registerBean);
-		if(r == 1) {
-			rb.setMessage("Registeration Successful");
-			SeminarRegistrationMailBean message = seminarMailDao.getMessage();
-			
-			String formattedMessage = message.getBody().replaceAll("{0}", user.getFirstName() +" "+ user.getLastName());
-			
-			message.setBody(formattedMessage);		
-			emailService.sendRegisterationMail(user,message);
-			//whatsappService.sendRegisterationWhatsapp(user,message);
-			rb.setStatus(200);
+		if(seminarRegisterDao.checkIfUserIsRegistered(registerBean.getUserID(), registerBean.getSeminarID())) {
+			int r = seminarRegisterDao.registerSeminar(registerBean);
+			rb.setData(registerBean);
+			if(r == 1) {
+				rb.setMessage("Registeration Successful");
+				SeminarRegistrationMailBean message = seminarMailDao.getMessage();
+				String formattedMessage = message.getBody().replaceAll("{0}", user.getFirstName() +" "+ user.getLastName());				
+				message.setBody(formattedMessage);		
+				emailService.sendRegisterationMail(user,message);
+				//whatsappService.sendRegisterationWhatsapp(user,message);
+				rb.setStatus(200);
+			}
+			else {
+				rb.setMessage("Registeration Unsuccessful");
+				rb.setStatus(-1);
+			}	
 		}
 		else {
-			rb.setMessage("Registeration Unsuccessful");
+			rb.setMessage("You have Already Registered For this Seminar");
 			rb.setStatus(-1);
 		}
 		return rb;

@@ -37,4 +37,17 @@ public class SeminarRegistrationDao {
 			return null;
 		}
 	}
+	public boolean checkIfUserIsRegistered(int userID,int seminarID) {
+		try {
+			List<SeminarRegistrationBean> list = smt.query("select * from seminarregistration where seminarid =  ? and userid = ?",new Object[] {seminarID,userID},new int[] {java.sql.Types.BIGINT,java.sql.Types.BIGINT},new BeanPropertyRowMapper<SeminarRegistrationBean>(SeminarRegistrationBean.class));
+			if(list.size() > 0) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}catch(Exception e) {
+			return false;
+		}
+	}
 }

@@ -1,6 +1,5 @@
 package com.service;
 
-import java.net.PasswordAuthentication;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -9,13 +8,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.bean.SeminarRegistrationMailBean;
 import com.bean.UserBean;
-import com.dao.SeminarRegistrationMailDao;
 
 @Service
 public class EmailService {
@@ -36,7 +31,6 @@ public class EmailService {
 		Session session = Session.getInstance(prop, new Authenticator() {
 			@Override
 			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-				// TODO Auto-generated method stub
 				return new javax.mail.PasswordAuthentication(from, appPassword);
 			}
 		});
