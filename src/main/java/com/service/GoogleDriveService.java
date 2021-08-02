@@ -13,11 +13,15 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.InputStreamContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.gson.GsonFactory;
 
+//JacksonFactory jsonFactory = new JacksonFactory();
+
+@SuppressWarnings("deprecation")
 @Service
 public class GoogleDriveService {
 
@@ -43,7 +47,7 @@ public class GoogleDriveService {
 		try {
 			java.io.File  key = new java.io.File("royal-counselling-app-c3e13e5f07fc.p12");
 			HttpTransport httpTransport = new NetHttpTransport();
-			JacksonFactory jsonFactory = new JacksonFactory();
+			JsonFactory jsonFactory = new GsonFactory();
 
 			GoogleCredential credential = new GoogleCredential.Builder().setTransport(httpTransport)
 					.setJsonFactory(jsonFactory).setServiceAccountId(serviceAccountEmail)

@@ -93,11 +93,14 @@
 
 		<!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty -->
 		<!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty -->
-		<dependency>
-			<groupId>com.google.oauth-client</groupId>
-			<artifactId>google-oauth-client-jetty</artifactId>
-			<version>1.31.5</version>
-		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client-jackson2 -->
+<dependency>
+    <groupId>com.google.api-client</groupId>
+    <artifactId>google-api-client-jackson2</artifactId>
+    <version>1.31.5</version>
+</dependency>
+		
 
 		<dependency>
 			<groupId>com.google.apis</groupId>
@@ -109,6 +112,7 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+
 	</dependencies>
 
 	<build>
