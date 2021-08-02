@@ -42,7 +42,7 @@ public class UserDao {
 		try {
 			LocalDateTime ct = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
 			Timestamp ctim = Timestamp.valueOf(ct);  
-			smt.update("insert into usertable(emailid,password,firstname,lastname,phonenumber,createat) values(?,?,?,?,?,?)",
+			smt.update("insert into usertable(emailid,password,firstname,lastname,phonenumber,createdat) values(?,?,?,?,?,?)",
 								userBean.getEmailID(),userBean.getPassword(),userBean.getFirstName(),
 								userBean.getLastName(),userBean.getPhoneNumber(),ctim);
 		}

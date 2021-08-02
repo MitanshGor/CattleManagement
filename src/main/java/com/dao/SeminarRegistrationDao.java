@@ -24,11 +24,12 @@ public class SeminarRegistrationDao {
 		try {
 			LocalDateTime ct = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
 			Timestamp ctim = Timestamp.valueOf(ct);  
-			smt.update("insert into seminarregistration(userid,seminarid,question,registeredat) values(?,?,?,?)",registerBean.getUserID(),
+			smt.update("insert into seminarregistration(userid,seminarid,question,registrationat) values(?,?,?,?)",registerBean.getUserID(),
 					registerBean.getSeminarID(),registerBean.getQuestion(),ctim);
 			i = 1;
 		}
 		catch(Exception e) {
+			e.printStackTrace();
 			i = -1;
 		}
 		return i;

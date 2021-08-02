@@ -10,13 +10,13 @@ public class UserBean {
 	String firstName;
 	String lastName;
 	String phoneNumber;
-	Timestamp createAt;
+	Timestamp createdAt;
 	
 	public Timestamp getCreateAt() {
-		return createAt;
+		return createdAt;
 	}
-	public void setCreateAt(Timestamp createAt) {
-		this.createAt = createAt;
+	public void setCreateAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
 	}
 	public int getUserID() {
 		return userID;

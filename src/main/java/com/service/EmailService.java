@@ -8,6 +8,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.bean.SeminarRegistrationMailBean;
 import com.bean.UserBean;
@@ -15,11 +17,16 @@ import com.bean.UserBean;
 @Service
 public class EmailService {
 	
+	@Value("${fromMail}")
+	String mailID;
+	
+	@Value("${mailPassword}")
+	String password;
 	
 	public void sendRegisterationMail(UserBean user,SeminarRegistrationMailBean mailMessage) {
 		String to = user.getEmailID(); // to address
-		final String from = "testjap517@gmail.com";// from address
-		final String appPassword = "afxfovyxdkfamsnz";
+		final String from = mailID;// from address
+		final String appPassword = password;
 		Properties prop = System.getProperties();
 
 		prop.put("mail.smtp.auth", "true");

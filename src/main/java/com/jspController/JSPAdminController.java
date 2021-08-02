@@ -22,9 +22,12 @@ import com.bean.LinkBean;
 import com.bean.SeminarBean;
 import com.bean.SeminarRegisteredUsers;
 import com.dao.AdminDao;
+import com.dao.CounsellingCancellationMailDao;
+import com.dao.CounsellingRegistrationMailDao;
 import com.dao.LinkDao;
 import com.dao.SeminarDao;
 import com.dao.SeminarRegistrationDao;
+import com.dao.SeminarRegistrationMailDao;
 import com.service.GoogleDriveService;
 
 
@@ -46,24 +49,13 @@ public class JSPAdminController {
 	
 	@Autowired
 	SeminarRegistrationDao seminarRegistrationDao;
+
 	
 	@GetMapping("/adminDashboard")
 	public String getAdminDashboard() {
 		return "AdminDashboard";
 	}
-	@GetMapping("/messageTemplates")
-	public String getMessagesTemplates(Model model,HttpSession session) {
-		String  msg = null;
-		try{
-			msg = (String)session.getAttribute("msg");
-		}
-		catch(Exception e) {
-			
-		}
-		session.removeAttribute("msg");
-		model.addAttribute("msg",msg);
-		return "AdminMessageTemplate";
-	}
+
 	@GetMapping("/seminarManagement")
 	public String getSeminarMangement(Model model,HttpSession session) {
 		String  msg = null;

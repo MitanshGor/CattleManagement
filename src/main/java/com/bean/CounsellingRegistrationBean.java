@@ -1,6 +1,6 @@
 package com.bean;
 
-public class SeminarRegistrationMailBean {
+public class CounsellingRegistrationBean {
 
 	String subject;
 	String body;
