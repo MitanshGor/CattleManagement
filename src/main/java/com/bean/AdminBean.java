@@ -2,7 +2,6 @@ package com.bean;
 
 import java.sql.Timestamp;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class AdminBean {
 	

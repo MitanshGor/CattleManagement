@@ -1,7 +1,9 @@
 package com.dao;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -38,9 +40,11 @@ public class UserDao {
 
 	public void insertUser(UserBean userBean) {
 		try {
-			smt.update("insert into usertable(emailid,password,firstname,lastname,phonenumber) values(?,?,?,?,?)",
+			LocalDateTime ct = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
+			Timestamp ctim = Timestamp.valueOf(ct);  
+			smt.update("insert into usertable(emailid,password,firstname,lastname,phonenumber,createat) values(?,?,?,?,?,?)",
 								userBean.getEmailID(),userBean.getPassword(),userBean.getFirstName(),
-								userBean.getLastName(),userBean.getPhoneNumber());
+								userBean.getLastName(),userBean.getPhoneNumber(),ctim);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

@@ -1,5 +1,8 @@
 package com.dao;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,8 +69,10 @@ public class SeminarDao {
 	}
 
 	public List<SeminarBean> getActiveSeminar(){
+		LocalDateTime ct = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
+		Timestamp ctim = Timestamp.valueOf(ct);  
 		try {
-			return smt.query("select * from seminartable where (current_timestamp between seminarregistrationstart::timestamp and seminarregistrationend::timestamp) and (acceptingregistration=true)", new BeanPropertyRowMapper<SeminarBean>(SeminarBean.class));
+			return smt.query("select * from seminartable where (? between seminarregistrationstart::timestamp and seminarregistrationend::timestamp) and (acceptingregistration=true)",new Object[] {ctim},new int[] {java.sql.Types.TIMESTAMP}, new BeanPropertyRowMapper<SeminarBean>(SeminarBean.class));
 		}
 		catch(Exception e) {
 			return null;

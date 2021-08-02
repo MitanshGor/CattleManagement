@@ -1,5 +1,8 @@
 package com.dao;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +22,10 @@ public class SeminarRegistrationDao {
 	public int registerSeminar(SeminarRegistrationBean registerBean) {
 		int i = 0;
 		try {
-			smt.update("insert into seminarregistration(userid,seminarid,question) values(?,?,?)",registerBean.getUserID(),
-					registerBean.getSeminarID(),registerBean.getQuestion());
+			LocalDateTime ct = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
+			Timestamp ctim = Timestamp.valueOf(ct);  
+			smt.update("insert into seminarregistration(userid,seminarid,question,registeredat) values(?,?,?,?)",registerBean.getUserID(),
+					registerBean.getSeminarID(),registerBean.getQuestion(),ctim);
 			i = 1;
 		}
 		catch(Exception e) {
