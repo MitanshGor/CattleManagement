@@ -69,11 +69,8 @@
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
-	<!-- 	<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-	 -->	<!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-jpa</artifactId> 
+			</dependency> -->	<!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
@@ -84,39 +81,35 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-	<!-- 	<dependency>
-			<groupId>com.twilio.sdk</groupId>
-			<artifactId>twilio</artifactId>
-			<version>8.17.0</version>
-		</dependency>
-		
-	 -->
-	 		 <!-- Upload Google Drive -->
-		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
+		<!-- <dependency> <groupId>com.twilio.sdk</groupId> <artifactId>twilio</artifactId> 
+			<version>8.17.0</version> </dependency> -->
+		<!-- Upload Google Drive -->
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client</artifactId>
-			<version>1.22.0</version>
+			<version>1.31.5</version>
 		</dependency>
 
+
+		<!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty -->
 		<!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty -->
 		<dependency>
 			<groupId>com.google.oauth-client</groupId>
 			<artifactId>google-oauth-client-jetty</artifactId>
-			<version>1.15.0-rc</version>
+			<version>1.31.5</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.google.apis</groupId>
 			<artifactId>google-api-services-drive</artifactId>
-			<version>v3-rev26-1.18.0-rc</version>
+			<version>v3-rev20210628-1.31.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-	 </dependencies>
+	</dependencies>
 
 	<build>
 		<plugins>
