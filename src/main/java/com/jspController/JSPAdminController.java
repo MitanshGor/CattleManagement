@@ -1,6 +1,11 @@
 package com.jspController;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpSession;
 
@@ -128,6 +133,8 @@ public class JSPAdminController {
 	@PostMapping("/addAdmin")
 	public String addAdmin(AdminBean admin,Model model,HttpSession session) {
 		if(adminDao.checkDuplicateEmail(admin.getEmailID())) {
+			LocalDateTime ct = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
+			admin.setCreatedAt(Timestamp.valueOf(ct));  
 			int a = adminDao.addAdmin(admin);
 			if (a == 1){
 				session.setAttribute("msg", "Added Admin Successfully");			

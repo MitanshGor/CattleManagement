@@ -1,6 +1,5 @@
 package com.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class AdminDao {
 	public int addAdmin(AdminBean admin) {
 		int i = -1;
 		try {
-			smt.update("insert into admintable (emailid,name,password) values(?,?,?)",admin.getEmailID(),admin.getName(),admin.getPassword());
+			smt.update("insert into admintable (emailid,name,password,createdat) values(?,?,?,?)",admin.getEmailID(),admin.getName(),admin.getPassword(),admin.getCreatedAt());
 			i = 1;
 		}catch(Exception e) {
 			i = 0;
