@@ -80,7 +80,7 @@ $(document).ready(function(){
 			var a = document.getElementById("messageTemplates");
 			a.className = 'nav-link active'			
 		}
-		else if(ur.includes("videoManagement"))
+		else if(ur.includes("videoManagement") || ur.includes("/addVideo") || ur.includes("/editVideo"))
 		{
 			var a = document.getElementById("videoManagement");
 			a.className = 'nav-link active'			

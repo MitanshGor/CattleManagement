@@ -67,7 +67,7 @@ public class SeminarRegistrationController {
 					values.put("seminar date",seminar.getSeminarStart().format(formatter));
 					values.put("seminar id",String.valueOf(seminar.getSeminarID()));
 					values.put("whatsapp link",seminar.getWhatsappLink());
-						
+
 					StrSubstitutor sub = new StrSubstitutor(values, "%(", ")");
 					message.setBody(sub.replace(message.getBody()));
 					message.setSubject(sub.replace(message.getSubject()));

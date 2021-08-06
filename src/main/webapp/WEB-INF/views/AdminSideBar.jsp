@@ -36,7 +36,7 @@
 							data-target="#submenu-1" aria-controls="submenu-1"><i
 								class=" fas fa-newspaper"></i>Message Templates<span
 								class="badge badge-success">6</span></a> 
-							<a class="nav-link" href="#" id="videoManagement"
+							<a class="nav-link" href="videoManagement" id="videoManagement"
 							aria-expanded="false" data-target="#submenu-1"
 							aria-controls="submenu-1"><i class="fas fa-video"></i>Video
 								Management<span class="badge badge-success">6</span></a> 

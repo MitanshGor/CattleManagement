@@ -26,7 +26,7 @@
 
 	<c:if test="${seminar.seminarID <= 0}">
 		<c:set var="url" value="addSeminar"></c:set>
-		<c:set var="btnValue" value="Add Smeinar"></c:set>
+		<c:set var="btnValue" value="Add Seminar"></c:set>
 		<c:set var="seminarLinkFinal" value="${seminarLink }"></c:set>
 		
 	</c:if>
@@ -210,7 +210,7 @@
 					
 									<div class="form-group row text-right">
 										<div class="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0 ">
-											<button type="submit" class="btn btn-space btn-primary">Submit</button>
+											<button type="submit" class="btn btn-space btn-primary">${btnValue }</button>
 										</div>
 									</div>
 								</form>
