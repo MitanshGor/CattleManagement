@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.lang3.text.StrSubstitutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -97,19 +98,32 @@ public class SeminarRegistrationController {
 		return rb;
 	}
 
-	@GetMapping("/getActiveSeminarList")
-	public ResponseBeanWithList<SeminarBean> getActiveSemianrList() {
-		ResponseBeanWithList<SeminarBean> rb = new ResponseBeanWithList<SeminarBean>();
-		List<SeminarBean> data = seminarDao.getActiveSeminar();
-		if (data != null) {
-			rb.setMessage("Succesfully Fetched");
-			rb.setData(data);
-			rb.setStatus(200);
-		} else {
-			rb.setMessage("Some Error Occured");
-			rb.setData(data);
-			rb.setStatus(-1);
+	@GetMapping("/getActiveSeminarListForRegisteration/{emailID}")
+	public ResponseBeanWithList<SeminarBean> getActiveSemianrList(@PathVariable("emailID") String emailID) {
+		UserBean user = userDao.getUserByEmailID(emailID);
+		List<SeminarBean> data = null;
+		if(user!=null) {
+			data = seminarDao.getActiveSeminarSeminarListByUser(user.getUserID());
 		}
+		ResponseBeanWithList<SeminarBean> rb = new ResponseBeanWithList<SeminarBean>();
+		rb.setData(data);
+		rb.setStatus(200);
+		rb.setMessage("Data fetched Successfully");
+		
+		return rb;
+	}
+	@GetMapping("/getSeminarListForRegisterated/{emailID}")
+	public ResponseBeanWithList<SeminarBean> getSeminarListForRegisterated(@PathVariable("emailID") String emailID) {
+		UserBean user = userDao.getUserByEmailID(emailID);
+		List<SeminarBean> data = null;
+		if(user!= null) {
+			data = seminarDao.getSeminarListForRegisterated(user.getUserID());
+		}
+		ResponseBeanWithList<SeminarBean> rb = new ResponseBeanWithList<SeminarBean>();
+		rb.setData(data);
+		rb.setStatus(200);
+		rb.setMessage("Data fetched Successfully");
+		
 		return rb;
 	}
 }

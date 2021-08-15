@@ -78,4 +78,24 @@ public class SeminarDao {
 			return null;
 		}
 	}
+	public List<SeminarBean> getActiveSeminarSeminarListByUser(int userID) {
+		LocalDateTime ct = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
+		Timestamp ctim = Timestamp.valueOf(ct);  
+		try {
+			return smt.query("select seminartable.* from seminartable where not exists (select * from seminarregistration where seminartable.seminarid = seminarregistration.seminarid and userid= ?) and  (? between seminarregistrationstart::timestamp and seminarregistrationend::timestamp) and (acceptingregistration=true)",new Object[] {userID,ctim},new int[] {java.sql.Types.BIGINT,java.sql.Types.TIMESTAMP}, new BeanPropertyRowMapper<SeminarBean>(SeminarBean.class));
+		}
+		catch(Exception e) {
+			return null;
+		}
+
+	}
+	public List<SeminarBean> getSeminarListForRegisterated(int userID) {
+		try {
+			return smt.query("select seminartable.* from seminartable where exists (select * from seminarregistration where seminartable.seminarid = seminarregistration.seminarid and userid= ?)",new Object[] {userID},new int[] {java.sql.Types.BIGINT}, new BeanPropertyRowMapper<SeminarBean>(SeminarBean.class));
+		}
+		catch(Exception e) {
+			return null;
+		}
+
+	}
 }
