@@ -1,5 +1,6 @@
 package com.jspController;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,7 @@ public class JSPAdminVideoController {
 	@GetMapping("/editVideo/{videoID}")
 	public String editVideo(Model model,@PathVariable("videoID") int videoID,HttpSession session) {
 		VideoBean video = videoDao.getVideoByID(videoID);
+		
 		if(video != null) {
 			session.setAttribute("video",video);
 			

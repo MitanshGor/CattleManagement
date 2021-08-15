@@ -11,7 +11,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import com.bean.SeminarRegistrationMailBean;
 import com.bean.UserBean;
 
 @Service
@@ -23,7 +22,7 @@ public class EmailService {
 	@Value("${mailPassword}")
 	String password;
 	
-	public void sendRegisterationMail(UserBean user,SeminarRegistrationMailBean mailMessage) {
+	public void sendMessage(UserBean user,String body,String subject) {
 		String to = user.getEmailID(); // to address
 		final String from = mailID;// from address
 		final String appPassword = password;
@@ -46,8 +45,8 @@ public class EmailService {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(from);
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-			message.setSubject(mailMessage.getSubject());
-			message.setContent(mailMessage.getBody().replaceAll("\n", "<br>"),"text/html");
+			message.setSubject(subject);
+			message.setContent(body.replaceAll("\n", "<br>"),"text/html");
 			Transport.send(message);
 		} catch (Exception e) {
 			e.printStackTrace();

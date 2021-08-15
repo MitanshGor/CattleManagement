@@ -1,144 +1,93 @@
-$(function() {
-    "use strict"; 
+document.addEventListener('DOMContentLoaded', function() {
+	$('#calendar1').fullCalendar({
+		eventClick: function(info) {
+			document.getElementById('modal-title').innerHTML = `View Time Slot Details`
+			document.querySelector('#modeDisplay').innerHTML = "Counselling Mode : " + "<b>" + info.counsellingType + "</b>";
+			document.querySelector('#startTimePrint').innerHTML = "Counselling Start Time : " + "<b>" + info.start.toISOString() + "</b>";
+			document.querySelector('#endTimePrint').innerHTML = "Counselling End Time  : " + "<b>" + info.end.toISOString() + "</b>";
+			document.querySelector('#consuellingLink').innerHTML = "Counselling Link  : " + "<b>" + info.link + "</b>";
+			document.querySelector('#counsellingTitle').innerHTML = "Counselling Title  : " + "<b>" + info.title + "</b>";
+			document.querySelector('#cancelAppointment').style.display = "block";
+			document.querySelector('#displayData').style.display = "block";
+			document.querySelector('#timeSlotForm').style.display = "none";
+			$("#cancelAppointment").attr('href', `cancelAppointment/${info.timeSlotID}`);
+			if (info.isBooked) {
+				document.querySelector("#bookingStatus").innerHTML = "<b>This Time Slot is booked Click on View User Button to see user profile</b>"
+				document.querySelector('#viewUser').style.display = "block";
+				$("#viewUser").attr('href', `viewUser/${info.userID}`);
+			}
+			else {
+				$("#viewUser").attr('href', '#');
+				document.querySelector('#viewUser').style.display = "none";
+				document.querySelector("#bookingStatus").innerHTML = "<b>This Time Slot is not booked</b>"
+			}
+			document.querySelector('#submitButton').style.display = "none";
+			$("#modalDemo").modal('show');
+		},
+		header: {
+			left: 'prev,next today',
+			center: 'title ',
+			right: 'addEventButton month,agendaWeek,agendaDay,listWeek'
+		},
+		customButtons: {
+			addEventButton: {
+				text: 'Add Time Slot',
+				click: function() {
+					document.querySelector('#submitButton').style.display = "block";
+					document.getElementById('modal-title').innerHTML = "Add Time Slot";
+					document.querySelector('#displayData').style.display = "none";
+					document.querySelector('#cancelAppointment').style.display = "none";
+					document.querySelector('#timeSlotForm').style.display = "block";
+					document.querySelector('#start').value = '';
+					document.querySelector('#end').value = '';
+					document.querySelector('#viewUser').style.display = "none";
+					$(function() {
+						var $radios = $('input:radio[name=counsellingType]');
+						$radios.filter('[value=Online]').prop('checked', true);
 
-    $(document).ready(function() {
+					});
+					$("#modalDemo").modal('show');
+				}
+			}
+		},
+		defaultDate: new Date(),
+		events: getData()
+	});
+});
 
-        $('#calendar1').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay,listWeek'
-            },
-            defaultDate: '2018-03-12',
-            navLinks: true, // can click day/week names to navigate views
-            editable: true,
-            eventLimit: true, // allow "more" link when too many events
-            events: [{
-                    title: 'All Day Event',
-                    start: '2018-03-01',
-                },
-                {
-                    title: 'Long Event',
-                    start: '2018-03-07',
-                    end: '2018-03-10'
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: '2018-03-09T16:00:00',
-                    backgroundColor: '#ffc108',
-                    borderColor: '#ffc108'
+function getData() {
+	var events = [];
+	$.ajax({
+		url: 'getAllCounsellingSlots',
+		method: 'GET',
+		success: function(data) {
+				data.forEach((r)=>{
+					console.log(r);	
+					if (r.booked == true) {
+						 r['backgroundColor']= '#ef172c',
+                    	r['borderColor']= '#ef172c',
+						r['title'] = `Personal Counselling of ${r.firstName} ${r.lastName}`;
+					}
+					else {
+						r['title'] = 'Personal Counselling Appointment Not Booked'
+					}
+					events.push({	
+						timeSlotID: r.timeSlotID,
+						title: r.title,
+						start: r.startTime,
+						end: r.endTime,
+						counsellingType: r.counsellingType,
+						link: r.link,
+						isBooked: r.booked,
+						backgroundColor : r.backgroundColor,
+						borderColor : r.borderColor,
+						userID : r.userID
+					});
+				})
+		},
+		async: false,
+		cache: false
+	});
+	return events;
+}
 
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: '2018-03-16T16:00:00',
-                    backgroundColor: '#ffc108',
-                    borderColor: '#ffc108'
-
-                },
-                {
-                    title: 'Conference',
-                    start: '2018-03-11',
-                    end: '2018-03-13',
-                    backgroundColor: '#ff407b',
-                    borderColor: '#ff407b'
-
-                },
-                {
-                    title: 'Meeting',
-                    start: '2018-03-12T10:30:00',
-                    end: '2018-03-12T12:30:00',
-                    backgroundColor: '#25d5f2',
-                    borderColor: '#25d5f2'
-                },
-                {
-                    title: 'Lunch',
-                    start: '2018-03-12T12:00:00',
-                    backgroundColor: '#ff407b',
-                    borderColor: '#ff407b'
-
-                },
-                {
-                    title: 'Meeting',
-                    start: '2018-03-12T14:30:00',
-                    backgroundColor: '#25d5f2',
-                    borderColor: '#25d5f2'
-                },
-                {
-                    title: 'Happy Hour',
-                    start: '2018-03-12T17:30:00'
-                },
-                {
-                    title: 'Dinner',
-                    start: '2018-03-12T20:00:00'
-                },
-                {
-                    title: 'Birthday Party',
-                    start: '2018-03-13T07:00:00',
-                    backgroundColor: '#ef172c',
-                    borderColor: '#ef172c'
-                },
-                {
-                    title: 'Click for Google',
-                    url: 'http://google.com/',
-                    start: '2018-03-28',
-                    backgroundColor: '#4285F4',
-                    borderColor: '#4285F4'
-                }
-            ]
-        });
-
-    });
-  
-   
-    $(document).ready(function() {
-
-
-        /* initialize the external events
-        -----------------------------------------------------------------*/
-
-        $('#external-events .fc-event').each(function() {
-
-            // store data so the calendar knows to render an event upon drop
-            $(this).data('event', {
-                title: $.trim($(this).text()), // use the element's text as the event title
-                stick: true // maintain when user navigates (see docs on the renderEvent method)
-            });
-
-            // make the event draggable using jQuery UI
-            $(this).draggable({
-                zIndex: 999,
-                revert: true, // will cause the event to go back to its
-                revertDuration: 0 //  original position after the drag
-            });
-
-        });
-
-
-        /* initialize the calendar
-        -----------------------------------------------------------------*/
-
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            editable: true,
-            droppable: true, // this allows things to be dropped onto the calendar
-            drop: function() {
-                // is the "remove after drop" checkbox checked?
-                if ($('#drop-remove').is(':checked')) {
-                    // if so, remove the element from the "Draggable Events" list
-                    $(this).remove();
-                }
-            }
-        });
-
-
-    });
-
-
- });

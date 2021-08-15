@@ -86,21 +86,15 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<!-- <dependency> <groupId>com.twilio.sdk</groupId> <artifactId>twilio</artifactId> 
-			<version>8.17.0</version> </dependency> -->
+		<dependency> <groupId>com.twilio.sdk</groupId> <artifactId>twilio</artifactId> 
+			<version>8.17.0</version> </dependency>
 		<!-- Upload Google Drive -->
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client</artifactId>
 			<version>1.31.5</version>
 		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty -->
-		<!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty -->
-
-		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client-jackson2 -->
-		<dependency>
+	<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client-jackson2</artifactId>
 			<version>1.31.5</version>

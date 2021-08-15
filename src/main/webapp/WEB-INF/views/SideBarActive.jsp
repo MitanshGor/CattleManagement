@@ -70,27 +70,27 @@ $(document).ready(function(){
 			var a = document.getElementById("seminarResources");
 			a.className = 'nav-link active'			
 		}
-		else if(ur.includes("personalCounselling"))
+		else if(ur.includes("/personalCounselling") || ur.includes("/bookedSlots") || ur.includes("/viewBookingSlotRequest"))
 		{
-			var a = document.getElementById("seminarResources");
+			var a = document.getElementById("personalCounselling");
 			a.className = 'nav-link active'			
 		}
-		else if(ur.includes("messageTemplates"))
+		else if(ur.includes("/messageTemplates"))
 		{
 			var a = document.getElementById("messageTemplates");
 			a.className = 'nav-link active'			
 		}
-		else if(ur.includes("videoManagement") || ur.includes("/addVideo") || ur.includes("/editVideo"))
+		else if(ur.includes("/videoManagement") || ur.includes("/addVideo") || ur.includes("/editVideo"))
 		{
 			var a = document.getElementById("videoManagement");
 			a.className = 'nav-link active'			
 		}
-		else if(ur.includes("pptRequest"))
+		else if(ur.includes("/pptRequest"))
 		{
 			var a = document.getElementById("pptRequest");
 			a.className = 'nav-link active'			
 		}
-		else if(ur.includes("linkManagement")){
+		else if(ur.includes("/linkManagement")){
 			var a = document.getElementById("linkManagement");
 			a.className = 'nav-link active'			
 		}

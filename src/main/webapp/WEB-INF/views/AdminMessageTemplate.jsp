@@ -76,6 +76,7 @@
 											<li>Seminar Date and Time: %(seminar date)</li>
 											<li>Seminar ID : %(seminar id)</li>
 											<li>Whatsapp Group Link : %(whatsapp link)</li>
+											<li>Seminar Link : %(link)</li>
 
 										</ul>
 
@@ -113,6 +114,8 @@
 												<li>Registered User Name : %(user name)</li>
 												<li>Counselling ID : %(counselling id)</li>
 												<li>Counselling Date and Time: %(counselling date)</li>
+												<li>Counselling Link : %(link)</li>
+									
 										</ul>
 
 									</div>

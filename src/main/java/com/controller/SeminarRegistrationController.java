@@ -23,6 +23,7 @@ import com.dao.SeminarRegistrationMailDao;
 import com.dao.UserDao;
 import com.service.EmailService;
 //import com.service.WhatsappService;
+import com.service.WhatsappService;
 
 @RestController
 public class SeminarRegistrationController {
@@ -39,8 +40,8 @@ public class SeminarRegistrationController {
 	@Autowired
 	SeminarDao seminarDao;
 
-	// @Autowired
-	// WhatsappService whatsappService;
+	@Autowired
+	WhatsappService whatsappService;
 
 	@Autowired
 	SeminarRegistrationMailDao seminarMailDao;
@@ -67,13 +68,18 @@ public class SeminarRegistrationController {
 					values.put("seminar date",seminar.getSeminarStart().format(formatter));
 					values.put("seminar id",String.valueOf(seminar.getSeminarID()));
 					values.put("whatsapp link",seminar.getWhatsappLink());
-
+					if(seminar.getSeminarType().equals("Offline")) {
+						values.put("link","Not Applicable");
+					}
+					else {
+						values.put("link",seminar.getSeminarZoomLink());
+					}
 					StrSubstitutor sub = new StrSubstitutor(values, "%(", ")");
 					message.setBody(sub.replace(message.getBody()));
 					message.setSubject(sub.replace(message.getSubject()));
 
-					emailService.sendRegisterationMail(user, message);
-					// whatsappService.sendRegisterationWhatsapp(user,message);
+					emailService.sendMessage(user, message.getBody(),message.getSubject());
+					whatsappService.sendMessage(user,message.getBody());
 					rb.setStatus(200);
 				} else {
 					rb.setMessage("Registeration Unsuccessful");

@@ -28,7 +28,7 @@
 							data-target="#submenu-1" aria-controls="submenu-1"><i
 								class="fas fa-list"></i>Seminar Resources <span
 								class="badge badge-success">6</span></a> 
-							<a class="nav-link" href="#" id="personalCounselling"
+							<a class="nav-link" href="personalCounselling" id="personalCounselling"
 							aria-expanded="false" data-target="#submenu-1" 
 							aria-controls="submenu-1"><i class="fas fa-address-card"></i>Personal
 								Counselling<span class="badge badge-success">6</span></a> 
