@@ -66,7 +66,7 @@ $(document).ready(function(){
 			var a = document.getElementById("seminarManagement");
 			a.className = 'nav-link active'			
 		}
-		else if(ur.includes("/seminarResources")){
+		else if(ur.includes("/seminarResources") || ur.includes("/addPowerPointPresentation") || ur.includes("/editPPT")){
 			var a = document.getElementById("seminarResources");
 			a.className = 'nav-link active'			
 		}

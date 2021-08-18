@@ -22,7 +22,8 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/assets/vendor/datatables/css/fixedHeader.bootstrap4.css">
 <%@include file="HeaderFile.jsp"%>
-<title>Video Management</title>
+
+<title>Power Point Request Management</title>
 </head>
 <body>
 	<div class="dashboard-main-wrapper">
@@ -33,7 +34,7 @@
 				<div class="row">
 					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 						<div class="page-header">
-							<h2 class="pageheader-title">Video Management</h2>
+							<h2 class="pageheader-title">Power Point Request Management</h2>
 							<p class="pageheader-text">Nulla euismod urna eros, sit amet
 								scelerisque torton lectus vel mauris facilisis faucibus at enim
 								quis massa lobortis rutrum.</p>
@@ -42,8 +43,8 @@
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="adminDashboard"
 											class="breadcrumb-link">Admin Dashboard</a></li>
-										<li class="breadcrumb-item active" aria-current="page">Video
-											Management</li>
+										<li class="breadcrumb-item active" aria-current="page">Power
+											Point Request Management</li>
 									</ol>
 								</nav>
 							</div>
@@ -56,63 +57,56 @@
 							<span id="msg">${msg }</span>
 						</div>
 					</div>
-					<div class="col-6 d-flex justify-content-end">
-						<a href="addVideo" class="btn bg-dark text-white open">Add
-							Video</a>
-					</div>
 				</div>
 				<br>
-				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-					<div class="card">
-						<div class="card-header">
-							<h5 class="mb-0">Video Table</h5>
-						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table id="example"
-									class="table table-striped table-bordered first"
-									style="width: 100%">
-									<thead>
-										<tr>
-											<th>Video ID</th>
-											<th>Video Title</th>
-											<th>Video Display Location</th>
-											<th>Video</th>
-											<th>Video Is Active</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
-
-										<c:forEach items="${videoList}" var="a">
+				<div class="row">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+						<div class="card">
+							<div class="card-header">Power Point Request Table</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="example"
+										class="table table-striped table-bordered second"
+										style="width: 100%">
+										<thead>
 											<tr>
-												<th>${a.videoID }</th>
-												<th>${a.videoTitle}</th>
-												<th>${a.videoDisplayLocation}</th>
-												<th><embed  width="480" height="240" src="${a.videoYoutubeLink }"></th>
-												<th>${a.videoActive? 'Yes' : 'No'}</th>
+												<th>Request ID</th>
+												<th>Name</th>
+												<th>Email ID</th>
+												<th>Request Query</th>
+												<th>Comment</th>
+												<th>Query Finish Time</th>
+												<th>Request At</th>
+												<th>Query Over</th>
 
-
-												<th><a href="editVideo/${a.videoID}"
-													class="btn bg-dark btn-xs text-white">Edit Video</a> 
-													<c:if test="${a.videoActive }">
-													<a
-													href="deactivateVideo/${a.videoID}"
-													class="btn bg-danger btn-xs text-white">Deactivate
-														Video</a>
-													</c:if>
-													<c:if test="${!a.videoActive }">
-													<a
-													href="activateVideo/${a.videoID}"
-													class="btn bg-danger btn-xs text-white">Activate
-														Video</a>
-													</c:if>
-													
-													</th>
+												<th>Action</th>
 											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
+										</thead>
+										<tbody>
+											<c:forEach items="${requestList}" var="a">
+												<tr>
+													<th class="id">${a.requestID }</th>
+													<th>${a.firstName} ${a.lastName}</th>
+													<th>${a.emailID}</th>
+													<th>${a.requestQuery}</th>
+													<th class="comment">${a.comment}</th>
+													<th>${a.queryFinishTime }</th>
+													<th>${a.requestAt}</th>
+													<th>${a.queryOver ? 'Yes':'No' }</th>
+													<th><c:if test="${!a.queryOver }">
+															<a href="closePPTRequestQuery/${a.requestID }"
+																class="btn bg-dark text-white open">Close Query</a>
+
+															<button type="button"
+																class="btn bg-dark text-white open use-address">
+																Edit Comment</button>
+
+														</c:if></th>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -120,8 +114,8 @@
 			</div>
 		</div>
 	</div>
-
-
+	<script
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 	<script
 		src="/resources/assets/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
 	<script
@@ -164,5 +158,41 @@
 	<script
 		src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
 	<%@include file="AdminFooter.jsp"%>
+	<script>
+		$(".use-address").click(function() {
+			var $row = $(this).closest("tr"); // Find the row
+			var $text = $row.find(".id").text(); // Find the text
+			var $comment = $row.find(".comment").text(); // Find the text
+
+			// Let's test it out
+			var commentValue = prompt(`Please enter the comment`, $comment);
+			var data={
+					requestID : parseInt($text),
+					comment : commentValue
+			}
+			$.ajax({
+				url: 'updateComment',
+				data : data,
+				method: 'POST',
+				success: function(data) {
+					var statusCode = parseInt(data);
+					document.getElementById("alert").style.display = "block";
+					if(statusCode === 200){
+						document.getElementById("msg").innerHTML= 'Updated Comment Successfully';
+						$(".comment").html(commentValue);	
+					}else{
+						document.getElementById("msg").innerHTML= 'Some error occured';
+					}
+					setTimeout(()=>{
+						  document.getElementById("alert").style.display = "none";
+					},2000)
+				},
+				async: true,
+				cache: false
+			});
+			console.log(data);
+		});
+	</script>
+
 </body>
 </html>

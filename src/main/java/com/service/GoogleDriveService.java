@@ -42,6 +42,10 @@ public class GoogleDriveService {
 	@Value("${google.userImageProfile}")
 	String userImageProfile;
 
+
+	@Value("${google.presentationFile}")
+	String presentationFile;
+	
 	public Drive getDriveService() {
 		Drive service = null;
 		try {
@@ -72,6 +76,9 @@ public class GoogleDriveService {
 			}
 			else if(imageType.equals("profile")) {
 				folderId = userImageProfile;
+			}
+			else if(imageType.equals("presentation")) {
+				folderId = presentationFile;
 			}
 			 if (null != file) {
 		        File fileMetadata = new File();
