@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bean.BookingTimeSlotBean;
 import com.bean.PersonalCounsellingBookBean;
 import com.bean.ResponseBean;
 import com.bean.ResponseBeanWithList;
@@ -57,6 +58,21 @@ public class PersonalCounsellingController {
 			rb.setStatus(-1);
 		}
 		rb.setData(pb);
+		return rb;
+	}
+	@GetMapping("requestForPersonalCounsellingByUser/{emailID}")
+	public ResponseBeanWithList<BookingTimeSlotBean> requestForPersonalCounsellingByUser(@PathVariable("emailID") String emailID){
+		ResponseBeanWithList<BookingTimeSlotBean> rb = new ResponseBeanWithList<BookingTimeSlotBean>();
+		UserBean user = userDao.getUserByEmailID(emailID);
+		if(user!=null){
+			rb.setData(timeSlotDao.getAllPersonalCounsellingRequestListByUser(user.getUserID()));
+			rb.setStatus(200);
+			rb.setMessage("Data Fetched");
+		}
+		else {
+			rb.setStatus(-1);
+			rb.setMessage("Invalid Request");
+		}
 		return rb;
 	}
 }

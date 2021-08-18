@@ -107,6 +107,9 @@ public class TimeSlotDao {
 	public List<BookingTimeSlotBean> getAllPersonalCounsellingRequestList(){
 		return smt.query("select * from personalcounsellingbooking inner join usertable using (userid) inner join timeslottable using (timeslotid) where accepted is null", new BeanPropertyRowMapper<BookingTimeSlotBean>(BookingTimeSlotBean.class));
 	}
+	public List<BookingTimeSlotBean> getAllPersonalCounsellingRequestListByUser(int userID){
+		return smt.query("select * from personalcounsellingbooking inner join usertable using (userid) inner join timeslottable using (timeslotid) where userID = ?",new Object[] {userID},new int[] {java.sql.Types.BIGINT}, new BeanPropertyRowMapper<BookingTimeSlotBean>(BookingTimeSlotBean.class));
+	}
 
 	public int updateBookingRequestUser(int personalCID,int userID,int timeSlotID) {
 		int i  =0;
