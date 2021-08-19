@@ -16,7 +16,7 @@
 							href="adminManagment" aria-expanded="false"
 							data-target="#submenu-1" aria-controls="submenu-1"><i
 								class="fa fa-fw fa-user-circle"></i>Admin Management</a> 
-							<a class="nav-link" href="#" aria-expanded="false" id="userMangement"
+							<a class="nav-link" href="userMangement" aria-expanded="false" id="userMangement"
 							data-target="#submenu-1" aria-controls="submenu-1"><i
 								class="fas fa-address-card"></i>User Management<span
 								class="badge badge-success">6</span></a> 

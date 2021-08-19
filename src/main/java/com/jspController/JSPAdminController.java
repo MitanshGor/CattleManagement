@@ -280,5 +280,10 @@ public class JSPAdminController {
 		}
 		return "AdminViewSeminarRegisteredUsers";
 	}
+	
+	@GetMapping("/changePassword")
+	public String changePassword() {
+		return "ChangePassword";
+	}
 
 }

@@ -1,5 +1,8 @@
 package com.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -8,6 +11,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.bean.LoginBean;
@@ -38,17 +43,41 @@ public class UserDao {
 			return true;
 	}
 
-	public void insertUser(UserBean userBean) {
+	public long insertUser(final UserBean userBean) {
+		long userID = 0;
+
+		GeneratedKeyHolder holder = new GeneratedKeyHolder();
 		try {
 			LocalDateTime ct = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
 			Timestamp ctim = Timestamp.valueOf(ct);  
-			smt.update("insert into usertable(emailid,password,firstname,lastname,phonenumber,createdat) values(?,?,?,?,?,?)",
-								userBean.getEmailID(),userBean.getPassword(),userBean.getFirstName(),
-								userBean.getLastName(),userBean.getPhoneNumber(),ctim);
+			smt.update(new PreparedStatementCreator() {
+				
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+					PreparedStatement psmt = con.prepareStatement("insert into usertable(emailid,password,"
+							+ "firstname,lastname,phonenumber,createdat) values(?,?,?,?,?,?)",java.sql.Statement.RETURN_GENERATED_KEYS);
+					psmt.setString(1, userBean.getEmailID());
+					psmt.setString(2, userBean.getPassword());
+					String firstName = userBean.getFirstName().substring(0,1).toUpperCase();
+					String remainFirstName = userBean.getFirstName().substring(1).toLowerCase();
+					
+					psmt.setString(3, firstName+remainFirstName);
+					String lastName = userBean.getLastName().substring(0,1).toUpperCase();
+					String remainLastName = userBean.getLastName().substring(1).toLowerCase();
+					
+					psmt.setString(4, lastName+remainLastName);
+					psmt.setString(5, userBean.getPhoneNumber());
+					psmt.setTimestamp(6, ctim);
+					return psmt;
+				}
+			},holder);	
+			userID = (Long)holder.getKeys().get("userid");
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		return userID;
 	}
 
 	public UserBean getUserByID(int userID) {
@@ -64,5 +93,16 @@ public class UserDao {
 			return users.get(0);
 		else
 			return null;
+	}
+
+	public int insertUserProfile(int userID) {
+		int i = 0;
+		try {
+			smt.update("insert into userprofiletable(userid) values(?)",userID);
+			i = 1;
+		}catch(Exception e) {
+			i= -1;
+		}
+		return i;
 	}
 }
