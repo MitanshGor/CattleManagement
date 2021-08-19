@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bean.LoginBean;
 import com.bean.UserBean;
+import com.bean.UserProfileBean;
 
 @Repository
 public class UserDao {
@@ -102,6 +103,30 @@ public class UserDao {
 			i = 1;
 		}catch(Exception e) {
 			i= -1;
+		}
+		return i;
+	}
+
+	public UserProfileBean getUserProfileByID(int userID) {
+		List<UserProfileBean> users = smt.query("select * from usertable where userid = ?",new Object[] {userID}, new int[] {java.sql.Types.BIGINT}, new BeanPropertyRowMapper<UserProfileBean>(UserProfileBean.class));
+		if (users.size() != 0)
+			return users.get(0);
+		else
+			return null;
+	}
+
+	public int updateUserProfile(UserProfileBean userProfileBean) {
+		int i = 0;
+		try {
+			smt.update("update userprofiletable set city=?,state=?,institutionname=?,gender=?,"
+					+ "grade=?,board=?,profileimage=? where userid=?",
+					userProfileBean.getCity(),userProfileBean.getState(),userProfileBean.getInstitutionName(),
+					userProfileBean.getGender(),userProfileBean.getBoard(),userProfileBean.getBoard(),userProfileBean.getProfileImage()
+					,userProfileBean.getUserID());
+			i = 1;
+		}catch(Exception e) {
+			e.printStackTrace();
+			i = -1;
 		}
 		return i;
 	}

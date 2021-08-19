@@ -4,7 +4,7 @@ public class UserProfileBean {
 	String city;
 	String state;
 	String institutionName;
-	String userID;
+	int userID;
 	String gender;
 	String grade;
 	String board;
@@ -38,10 +38,10 @@ public class UserProfileBean {
 	public void setInstitutionName(String institutionName) {
 		this.institutionName = institutionName;
 	}
-	public String getUserID() {
+	public int getUserID() {
 		return userID;
 	}
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 	public String getGender() {

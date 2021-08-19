@@ -1,8 +1,9 @@
 package com.controller;
 
-import javax.mail.Multipart;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,20 +69,40 @@ public class UserController {
 		}
 		return rb;
 	}
+	
 	@PostMapping("/signUpUserProfile")
 	public ResponseBean<UserProfileBean> signUpUserProfile(UserProfileBean userProfileBean,@RequestParam("image") MultipartFile file){
 		ResponseBean<UserProfileBean> rb = new ResponseBean<UserProfileBean>(); 
-		System.out.println("FIle name ->" +file.getOriginalFilename());
-		System.out.println("User EmailID ->" +userProfileBean.getEmailID());
-		System.out.println("Image Description ->" +userProfileBean.getImageDesc());
+		UserBean user = userDao.getUserByEmailID(userProfileBean.getEmailID());
+		userProfileBean.setUserID(user.getUserID());
 		if(!file.isEmpty()) {
-			googleDriveService.upLoadFile(file, "profile");
+			if(userProfileBean.getImageDesc().equals("new")) {
+				String id = googleDriveService.upLoadFile(file, "profile");
+				userProfileBean.setProfileImage("https://drive.google.com/uc?export=view&id="+id);
+			}
+		}
+		int i = userDao.updateUserProfile(userProfileBean);
+		if(i==1) {
+			rb.setStatus(200);
+			rb.setMessage("Profile Setup Succesfull");				
+		}
+		else {
+			rb.setStatus(-1);
+			rb.setMessage("Some error occured");							
 		}
 		rb.setData(userProfileBean);
-		rb.setStatus(200);
-		rb.setMessage("Profile Setup Succesfull");
-		
-		
 		return rb;
 	}
+	@GetMapping("/signUpUserProfile/{emailID}")
+	public ResponseBean<UserProfileBean> signUpUserProfileByEmailID(@PathVariable("emailID") String emailID){
+		ResponseBean<UserProfileBean> rb = new ResponseBean<UserProfileBean>(); 
+		UserBean user = userDao.getUserByEmailID(emailID);
+		UserProfileBean userDBMSProfile = userDao.getUserProfileByID(user.getUserID());
+		rb.setMessage("Fetch Data Successfully");
+		rb.setStatus(200);
+		rb.setData(userDBMSProfile);
+		return rb;
+	}
+	
+	
 }
