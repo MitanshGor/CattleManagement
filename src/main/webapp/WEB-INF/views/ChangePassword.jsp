@@ -44,7 +44,7 @@ body {
 					enter your New Password</span>
 			</div>
 			<div class="card-body">
-				<form action="">
+				<form action="changePassword" method="post">
 						<div class="form-group">
 							<input class="form-control form-control-lg" id="pass1"
 								name="password" autocomplete="off" type="password"

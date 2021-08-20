@@ -44,11 +44,11 @@ body {
 					enter your user information.</span>
 			</div>
 			<div class="card-body">
-				<form action="">
+				<form action="forgotPassword" method="post">
 					<p>Don't worry, we'll send you an email to reset your password.</p>
 					<div class="form-group">
 						<input class="form-control form-control-lg" type="email"
-							name="email" placeholder="Your Email" autocomplete="off" required>
+							name="emailID" placeholder="Your Email" autocomplete="off" required>
 					</div>
 					<div class="form-group pt-1">
 						<input class="btn btn-block btn-primary btn-xl" type="submit"

@@ -22,12 +22,9 @@ import com.bean.LinkBean;
 import com.bean.SeminarBean;
 import com.bean.SeminarRegisteredUsers;
 import com.dao.AdminDao;
-import com.dao.CounsellingCancellationMailDao;
-import com.dao.CounsellingRegistrationMailDao;
 import com.dao.LinkDao;
 import com.dao.SeminarDao;
 import com.dao.SeminarRegistrationDao;
-import com.dao.SeminarRegistrationMailDao;
 import com.service.GoogleDriveService;
 
 
@@ -111,14 +108,7 @@ public class JSPAdminController {
 		model.addAttribute("admins", adminDao.getAllAdmin());
 		return "AdminManagmentDashboard";
 	}
-	@GetMapping("/loginForm")
-	public String loginForm() {
-		return "LoginForm";
-	}
-	@GetMapping("/forgotPassword")
-	public String forgotPassword() {
-		return "ForgotPassword";
-	}
+
 	
 	@PostMapping("/addAdmin")
 	public String addAdmin(AdminBean admin,Model model,HttpSession session) {
@@ -280,10 +270,6 @@ public class JSPAdminController {
 		}
 		return "AdminViewSeminarRegisteredUsers";
 	}
-	
-	@GetMapping("/changePassword")
-	public String changePassword() {
-		return "ChangePassword";
-	}
+
 
 }

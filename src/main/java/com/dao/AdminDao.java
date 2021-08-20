@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bean.AdminBean;
+import com.bean.LoginBean;
 
 @Repository
 public class AdminDao {
@@ -50,5 +51,43 @@ public class AdminDao {
 
 		return i;
 	}
+	public AdminBean loginAdmin(LoginBean loginBean) {
+		AdminBean adminBean = null;
+		try{
+			List<AdminBean> user = smt.query("select * from admintable where emailid=? and password=?",new Object[] {loginBean.getEmailID(),loginBean.getPassword()},new int[] {java.sql.Types.VARCHAR,java.sql.Types.VARCHAR}, new BeanPropertyRowMapper<AdminBean>(AdminBean.class));
+			if(user.size()==1) {
+				adminBean=user.get(0);
+			}
+		}catch(Exception e) {
+			
+		}
+		return adminBean;
+		
+	}
+	public AdminBean getAdminByEmailID(String emailID) {
+		AdminBean adminBean = null;
+		try{
+			List<AdminBean> user = smt.query("select * from admintable where emailid=?",new Object[] {emailID},new int[] {java.sql.Types.VARCHAR}, new BeanPropertyRowMapper<AdminBean>(AdminBean.class));
+			if(user.size()==1) {
+				adminBean=user.get(0);
+			}
+		}catch(Exception e) {
+			
+		}
+		return adminBean;
+		
+	}
+
+	public int changePassword(String password, String emailID) {
+		int i = 0;
+		try {
+			smt.update("update admintable set password=? where emailid=?",password,emailID);
+			i= 1;
+		}catch(Exception e) {
+			
+		}
+		return i;
+	}
+	
 
 }
