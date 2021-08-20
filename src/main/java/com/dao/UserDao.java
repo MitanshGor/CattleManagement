@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
+import com.bean.CompleteUserProfileBean;
 import com.bean.LoginBean;
 import com.bean.UserBean;
 import com.bean.UserProfileBean;
@@ -129,5 +130,61 @@ public class UserDao {
 			i = -1;
 		}
 		return i;
+	}
+	public List<CompleteUserProfileBean> getAllUserProfileList(){
+		return smt.query("select * from usertable join userprofiletable using (userid)", new BeanPropertyRowMapper<CompleteUserProfileBean>(CompleteUserProfileBean.class));
+	}
+
+	public int deactivateUser(int userID) {
+		int i = 1;
+		try {
+			smt.update("update usertable set useractive=false where userid=?",userID);
+		}
+		catch(Exception e) {
+			
+			i = 0;
+		}
+		return i;
+	}
+
+	public int activateUser(int userID) {
+		int i = 1;
+		try {
+			smt.update("update usertable set useractive=true where userid=?",userID);
+		}
+		catch(Exception e) {
+			i = 0;
+		}
+		return i;
+	}
+
+	public int markUserInterested(int userID) {
+		int i = 1;
+		try {
+			smt.update("update usertable set userinterested=true where userid=?",userID);
+		}
+		catch(Exception e) {
+			i = 0;
+		}
+		return i;
+	}
+
+	public int markUserUninterested(int userID) {
+		int i = 1;
+		try {
+			smt.update("update usertable set userinterested=false where userid=?",userID);
+		}
+		catch(Exception e) {
+			i = 0;
+		}
+		return i;
+	}
+	public CompleteUserProfileBean getUserProfile(int userID){
+		List<CompleteUserProfileBean> user= smt.query("select * from usertable join userprofiletable using (userid) where userid=?",new Object[] {userID},new int[] {java.sql.Types.BIGINT}, new BeanPropertyRowMapper<CompleteUserProfileBean>(CompleteUserProfileBean.class));
+		if(user.size()==1) {
+			return user.get(0);
+		}else {
+			return null;
+		}
 	}
 }

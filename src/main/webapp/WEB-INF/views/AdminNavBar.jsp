@@ -4,7 +4,7 @@
 <!-- ============================================================== -->
 <div class="dashboard-header">
 	<nav class="navbar navbar-expand-lg bg-white fixed-top">
-		<a class="navbar-brand" href="adminDashboard"><img
+		<a class="navbar-brand" href="adminManagment"><img
 			src='/resources/assets/images/LOGO_ROYAL.png' width='128px'></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"

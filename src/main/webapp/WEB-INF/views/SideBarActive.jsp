@@ -58,8 +58,8 @@ $(document).ready(function(){
 		if (ur.includes("/adminManagment")){
 			var a = document.getElementById("adminManagment");
 			a.className = 'nav-link active'
-		}else if(ur.includes("/userManagment")){
-			var a = document.getElementById("userManagment");
+		}else if(ur.includes("/userMangement") || ur.includes("/viewUserProfile")){
+			var a = document.getElementById("userMangement");
 			a.className = 'nav-link active'			
 		}
 		else if(ur.includes("/seminarManagement") || ur.includes("/addSeminar") || ur.includes("/editSeminar") || ur.includes("/viewSeminar")){

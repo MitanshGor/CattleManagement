@@ -22,6 +22,19 @@ jQuery(document).ready(function($) {
                 .appendTo('#example_wrapper .col-md-6:eq(0)');
         });
     }
+      if ($("table.third").length) {
+
+        $(document).ready(function() {
+            var table = $('table.third').DataTable({
+                lengthChange: false,
+                buttons: ['copy', 'excel', 'pdf', 'print', 'colvis']
+            });
+
+            table.buttons().container()
+                .appendTo('#example_wrapper .col-md-6:eq(0)');
+        });
+    }
+
 
 
     if ($("#example2").length) {

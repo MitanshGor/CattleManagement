@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bean.SeminarBean;
+import com.bean.SeminarRegistrationUser;
 
 @Repository
 public class SeminarDao {
@@ -96,6 +97,14 @@ public class SeminarDao {
 		catch(Exception e) {
 			return null;
 		}
-
+	}
+	public List<SeminarRegistrationUser> getSeminarListForRegisteratedList(int userID) {
+		try {
+			return smt.query("select * from seminartable join seminarregistration using (seminarid) where userid= ?",new Object[] {userID},new int[] {java.sql.Types.BIGINT}, new BeanPropertyRowMapper<SeminarRegistrationUser>(SeminarRegistrationUser.class));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

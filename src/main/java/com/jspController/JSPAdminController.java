@@ -51,10 +51,10 @@ public class JSPAdminController {
 	SeminarRegistrationDao seminarRegistrationDao;
 
 	
-	@GetMapping("/adminDashboard")
-	public String getAdminDashboard() {
-		return "AdminDashboard";
-	}
+	
+	  @GetMapping("/adminDashboard") public String getAdminDashboard() { 
+		  return "redirect:/admin/adminManagment"; }
+	 
 
 	@GetMapping("/seminarManagement")
 	public String getSeminarMangement(Model model,HttpSession session) {

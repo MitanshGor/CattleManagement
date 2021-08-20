@@ -5,11 +5,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class BookingTimeSlotBean {
-	String firstName;
-	String lastName;
-	String emailID;
-	String phoneNumber;
+public class PersonalCounsellingUserBean {
 	int timeSlotID;
 	int userID;
 	
@@ -20,43 +16,15 @@ public class BookingTimeSlotBean {
 	public LocalDateTime endTime;
 	
 	String counsellingType;
+	Timestamp acceptedAt;
 	String link;
-	int personalCID;
 	Timestamp requestedAt;
-	boolean accepted;
 	
-	public boolean isAccepted() {
-		return accepted;
-	}
-	public void setAccepted(boolean accepted) {
-		this.accepted = accepted;
+	public Timestamp getRequestedAt() {
+		return requestedAt;
 	}
 	public void setRequestedAt(Timestamp requestedAt) {
 		this.requestedAt = requestedAt;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public String getEmailID() {
-		return emailID;
-	}
-	public void setEmailID(String emailID) {
-		this.emailID = emailID;
-	}
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(String phonenumber) {
-		this.phoneNumber = phonenumber;
 	}
 	public int getTimeSlotID() {
 		return timeSlotID;
@@ -88,23 +56,17 @@ public class BookingTimeSlotBean {
 	public void setCounsellingType(String counsellingType) {
 		this.counsellingType = counsellingType;
 	}
+	public Timestamp getAcceptedAt() {
+		return acceptedAt;
+	}
+	public void setAcceptedAt(Timestamp acceptedAt) {
+		this.acceptedAt = acceptedAt;
+	}
 	public String getLink() {
 		return link;
 	}
 	public void setLink(String link) {
 		this.link = link;
 	}
-	public int getPersonalCID() {
-		return personalCID;
-	}
-	public void setPersonalCID(int personalCID) {
-		this.personalCID = personalCID;
-	}
-	public Timestamp getRequestedAt() {
-		return requestedAt;
-	}
-	public void setRequestedat(Timestamp requestedat) {
-		this.requestedAt = requestedat;
-	}
-	
+
 }
