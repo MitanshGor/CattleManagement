@@ -48,12 +48,8 @@ public class PowerPointController {
 	@PostMapping("/getAllSearchedPPT")
 	public ResponseBeanWithList<PowerPointBean> getAllSearchedPPT(@RequestParam("searchQuery") String search){
 		ResponseBeanWithList<PowerPointBean> rb = new ResponseBeanWithList<PowerPointBean>();
-		String[] words = search.split("\\s+");
-		for (int i = 0; i < words.length; i++) {
-		    words[i] = words[i].replaceAll("[^\\w]", "");
-		    words[i] = ("%"+words[i]+"%").toLowerCase();
-		}
 		
+		String[] words = search.replaceAll("[^a-zA-Z0-9]", " ").split(" ");
 		rb.setStatus(200);
 		rb.setMessage("Fetch Data Successfully");
 		rb.setData(powerPointDao.getAllActiveSearchedPowerPoints(words));
