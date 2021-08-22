@@ -181,4 +181,18 @@ public class TimeSlotDao {
 	    Timestamp tSearch = new Timestamp(cal.getTimeInMillis());
 		return smt.query("select * from timeslottable where starttime >= ? and booked = false",new Object[] {tSearch}, new int[] {java.sql.Types.TIMESTAMP}, new BeanPropertyRowMapper<TimeSlotBean>(TimeSlotBean.class));
 	}
+	public List<TimeSlotBean> getAllActiveCounsellingSlotsForSelectedDate(String date){
+		String[] dateArray = date.split("-");		
+		
+		Calendar cal = Calendar.getInstance();
+	    cal.set(Integer.parseInt(dateArray[2]),Integer.parseInt(dateArray[1]) -1, Integer.parseInt(dateArray[0]), 0, 0);
+	    
+	    Calendar cal1 = Calendar.getInstance();
+	    cal1.set(Integer.parseInt(dateArray[2]),Integer.parseInt(dateArray[1]) -1, Integer.parseInt(dateArray[0]), 0, 0);
+	    cal1.add(Calendar.DAY_OF_MONTH, 1);
+	 
+	    Timestamp tSearchS = new Timestamp(cal.getTimeInMillis());
+	    Timestamp tSearchE = new Timestamp(cal1.getTimeInMillis());
+	    return smt.query("select * from timeslottable where starttime between ? and ? and booked = false",new Object[] {tSearchS,tSearchE}, new int[] {java.sql.Types.TIMESTAMP,java.sql.Types.TIMESTAMP}, new BeanPropertyRowMapper<TimeSlotBean>(TimeSlotBean.class));
+	}
 }

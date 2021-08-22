@@ -26,12 +26,12 @@ public class PersonalCounsellingController {
 	
 	@Autowired
 	TimeSlotDao timeSlotDao;
-	@GetMapping("getAllActiveCounsellingSlots")
-	public ResponseBeanWithList<TimeSlotBean> getAllActiveCounsellingSlots(){
+	@GetMapping("getAllActiveCounsellingSlots/{date}")
+	public ResponseBeanWithList<TimeSlotBean> getAllActiveCounsellingSlots(@PathVariable("date") String date){
 		ResponseBeanWithList<TimeSlotBean> rb = new ResponseBeanWithList<TimeSlotBean>();
 		rb.setMessage("Fetch Successfully");
 		rb.setStatus(400);
-		rb.setData(timeSlotDao.getAllActiveCounsellingSlots());
+		rb.setData(timeSlotDao.getAllActiveCounsellingSlotsForSelectedDate(date));
 		return rb;
 	}
 	@GetMapping("requestForPersonalCounselling/{emailID}/{timeSlotID}")

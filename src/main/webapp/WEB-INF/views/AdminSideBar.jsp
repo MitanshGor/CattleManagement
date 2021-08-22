@@ -48,6 +48,9 @@
 							aria-expanded="false" data-target="#submenu-1"
 							aria-controls="submenu-1"><i class=" fas fa-link"></i>Link
 								Management<span class="badge badge-success">6</span></a>
+									<a class="nav-link" href="..\swagger-ui.html" id="linkManagement"
+							aria-expanded="false" data-target="#submenu-1"
+							aria-controls="submenu-1"><i class=" fas fa-info"></i>Swagger Doc<span class="badge badge-success">6</span></a>
 						</li>
 				</ul>
 			</div>
