@@ -51,10 +51,10 @@ public class PersonalCounsellingController {
 			}
 			else {
 				rb.setMessage("Some error occured");
-				rb.setStatus(-1);
+				rb.setStatus(-100);
 			}
 		}else {
-			rb.setMessage("Already Registered Slot");
+			rb.setMessage("Already Registered/Requested Slot");
 			rb.setStatus(-1);
 		}
 		rb.setData(pb);
