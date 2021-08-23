@@ -97,7 +97,7 @@ public class TimeSlotDao {
 	public boolean insertRequestPersonalCounselling(PersonalCounsellingBookBean pb) {
 		boolean flag = true;
 		try {
-			smt.update("insert into personalcounsellingbooking(timeslotid,userid, requestedat) values(?,?,?)",pb.getTimeSlotID(),pb.getUserID(),pb.getRequestedAt());
+			smt.update("insert into personalcounsellingbooking(timeslotid,userid, requestedat,accepted) values(?,?,?,?)",pb.getTimeSlotID(),pb.getUserID(),pb.getRequestedAt(),false);
 		}
 		catch(Exception e) {
 			flag = false;
