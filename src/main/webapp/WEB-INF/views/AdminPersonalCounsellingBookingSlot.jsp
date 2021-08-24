@@ -159,7 +159,6 @@
 		    var table = $('table.second').DataTable({
                 lengthChange: false,
                 buttons: ['copy', 'excel', 'pdf', 'print', 'colvis'],
-                order: [[1, 'asc']],
     	        rowGroup: {
     	            dataSrc: 2
     	        },
@@ -167,7 +166,7 @@
                     { "visible": true, "targets": groupColumn }
                 ],
                 "order": [
-                    [6, 'asc']
+                    [1, 'asc']
                 ],
                 "drawCallback": function(settings) {
                     var api = this.api();
@@ -190,14 +189,14 @@
             table.buttons().container()
                 .appendTo('#example_wrapper .col-md-6:eq(0)');
             // Order by the grouping
-            $('#example tbody').on('click', 'tr.group', function() {
+             $('#example tbody').on('click', 'tr.group', function() {
                 var currentOrder = table.order()[0];
                 if (currentOrder[0] === groupColumn && currentOrder[1] === 'asc') {
                     table.order([groupColumn, 'desc']).draw();
                 } else {
                     table.order([groupColumn, 'asc']).draw();
                 }
-            });
+            }); 
 	});
 	
 	

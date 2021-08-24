@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bean.BookedTimeSlotBean;
 import com.bean.BookingTimeSlotBean;
+import com.bean.BookingTimeSlotBeanString;
 import com.bean.PersonalCounsellingBookBean;
 import com.bean.TimeSlotBean;
 
@@ -104,11 +105,11 @@ public class TimeSlotDao {
 		}
 		return flag;
 	}
-	public List<BookingTimeSlotBean> getAllPersonalCounsellingRequestList(){
-		return smt.query("select * from personalcounsellingbooking inner join usertable using (userid) inner join timeslottable using (timeslotid) where accepted is null", new BeanPropertyRowMapper<BookingTimeSlotBean>(BookingTimeSlotBean.class));
+	public List<BookingTimeSlotBeanString> getAllPersonalCounsellingRequestList(){
+		return smt.query("select * from personalcounsellingbooking inner join usertable using (userid) inner join timeslottable using (timeslotid) where accepted is null", new BeanPropertyRowMapper<BookingTimeSlotBeanString>(BookingTimeSlotBeanString.class));
 	}
-	public List<BookingTimeSlotBean> getAllPersonalCounsellingRequestListByUser(int userID){
-		return smt.query("select * from personalcounsellingbooking inner join usertable using (userid) inner join timeslottable using (timeslotid) where userID = ?",new Object[] {userID},new int[] {java.sql.Types.BIGINT}, new BeanPropertyRowMapper<BookingTimeSlotBean>(BookingTimeSlotBean.class));
+	public List<BookingTimeSlotBeanString> getAllPersonalCounsellingRequestListByUser(int userID){
+		return smt.query("select * from personalcounsellingbooking inner join usertable using (userid) inner join timeslottable using (timeslotid) where userID = ?",new Object[] {userID},new int[] {java.sql.Types.BIGINT}, new BeanPropertyRowMapper<BookingTimeSlotBeanString>(BookingTimeSlotBeanString.class));
 	}
 
 	public int updateBookingRequestUser(int personalCID,int userID,int timeSlotID) {

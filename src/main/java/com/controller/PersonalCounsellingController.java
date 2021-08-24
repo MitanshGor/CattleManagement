@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bean.BookingTimeSlotBean;
+import com.bean.BookingTimeSlotBeanString;
 import com.bean.PersonalCounsellingBookBean;
 import com.bean.ResponseBean;
 import com.bean.ResponseBeanWithList;
@@ -61,8 +62,8 @@ public class PersonalCounsellingController {
 		return rb;
 	}
 	@GetMapping("requestForPersonalCounsellingByUser/{emailID}")
-	public ResponseBeanWithList<BookingTimeSlotBean> requestForPersonalCounsellingByUser(@PathVariable("emailID") String emailID){
-		ResponseBeanWithList<BookingTimeSlotBean> rb = new ResponseBeanWithList<BookingTimeSlotBean>();
+	public ResponseBeanWithList<BookingTimeSlotBeanString> requestForPersonalCounsellingByUser(@PathVariable("emailID") String emailID){
+		ResponseBeanWithList<BookingTimeSlotBeanString> rb = new ResponseBeanWithList<BookingTimeSlotBeanString>();
 		UserBean user = userDao.getUserByEmailID(emailID);
 		if(user!=null){
 			rb.setData(timeSlotDao.getAllPersonalCounsellingRequestListByUser(user.getUserID()));
