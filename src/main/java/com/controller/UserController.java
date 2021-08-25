@@ -1,6 +1,7 @@
 package com.controller;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import com.bean.ResponseBean;
 import com.bean.UserBean;
 import com.bean.UserProfileBean;
 import com.dao.UserDao;
+import com.service.EmailService;
 import com.service.GoogleDriveService;
 
 @RestController
@@ -24,6 +26,9 @@ public class UserController {
 	
 	@Autowired
 	GoogleDriveService googleDriveService;
+	
+	@Autowired
+	EmailService emailService;
 	
 	@PostMapping("/loginUser")
 	public ResponseBean<UserBean> loginUser(LoginBean loginBean){
@@ -103,6 +108,21 @@ public class UserController {
 		rb.setData(userDBMSProfile);
 		return rb;
 	}
-	
+	@PostMapping("/forgotPasswordByUser")
+	public ResponseBean<UserBean> forgotPassword(@RequestParam("emailID") String emailID) {
+		ResponseBean<UserBean> rb = new ResponseBean<UserBean>();
+		UserBean user = userDao.getUserByEmailID(emailID.trim());
+		if(user!=null) {
+			emailService.sendMessage(user, "Your password is : "+user.getPassword(), "Forgot Password Request");
+			rb.setMessage("Email Sent Successfully");
+			rb.setStatus(200);
+		}
+		else {
+			rb.setMessage("Invalid EmailID");
+			rb.setStatus(-1);
+		}
+		rb.setData(user);		
+		return rb;
+	}
 	
 }
