@@ -59,6 +59,18 @@ public class PowerPointRequestDao {
 		}
 		return i;
 	}
-	
+	public PowerPointRequest getRequestByID(int requestID) {
+		try {
+			List<PowerPointRequest> list = smt.query("select * from pptrequesttable where requestid=?",new Object[] {requestID},new int[] {java.sql.Types.BIGINT}, new BeanPropertyRowMapper<PowerPointRequest>(PowerPointRequest.class));
+			if(list.size() == 1) {
+				return list.get(0);
+			}
+			else {
+				return null;
+			}
+		}catch(Exception e) {
+			return null;			
+		}
+	}
 	
 }
