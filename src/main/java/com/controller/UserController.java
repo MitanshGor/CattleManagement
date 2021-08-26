@@ -36,6 +36,10 @@ public class UserController {
 		UserBean user = userDao.getUserByLogin(loginBean);
 		
 		if(user != null) {
+			if(!user.getTokenID().equals(loginBean.getTokenID())) {
+				user.setTokenID(loginBean.getTokenID());
+				userDao.updateTokenID(user);
+			}
 			rb.setData(user);
 			rb.setMessage("Succesfully Login");
 			rb.setStatus(200);

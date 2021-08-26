@@ -187,4 +187,13 @@ public class UserDao {
 			return null;
 		}
 	}
+
+	public void updateTokenID(UserBean user) {
+		try {
+			smt.update("update usertable set tokenid = ? where userid = ?",user.getTokenID(),user.getUserID());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

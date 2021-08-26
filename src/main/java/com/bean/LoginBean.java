@@ -3,6 +3,14 @@ package com.bean;
 public class LoginBean {
 	String emailID;
 	String password;
+	String tokenID;
+	
+	public String getTokenID() {
+		return tokenID;
+	}
+	public void setTokenID(String tokenID) {
+		this.tokenID = tokenID;
+	}
 	public String getEmailID() {
 		return emailID;
 	}

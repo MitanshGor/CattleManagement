@@ -27,7 +27,7 @@ public class AuthCheckFilter implements Filter {
 			try {
 				user = (String)session.getAttribute("userType");
 				
-				if (re.endsWith("/forgotpassword") || re.endsWith("loginForm") || re.endsWith("logoutAdmin")) {
+				if (re.endsWith("/forgotPassword") || re.endsWith("loginForm") || re.endsWith("logoutAdmin")) {
 					chain.doFilter(request, response);
 				} 
 				else if (user != null && user.equals("ADMIN")) {
