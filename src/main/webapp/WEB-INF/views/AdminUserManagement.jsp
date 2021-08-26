@@ -72,10 +72,10 @@
 									style="width: 100%">
 									<thead>
 										<tr>
-											<th>User ID</th>
+											<th>Serial ID</th>
 											<th>User Profile Image</th>
 											<th>User Name</th>
-											<th>Email ID</th>
+											<th>Email ID/ User ID</th>
 											<th>Phone Number</th>
 											<th>User Created At</th>
 											<th>City</th>

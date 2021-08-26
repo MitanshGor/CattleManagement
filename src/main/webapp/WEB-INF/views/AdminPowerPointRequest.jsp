@@ -179,7 +179,7 @@
 					document.getElementById("alert").style.display = "block";
 					if(statusCode === 200){
 						document.getElementById("msg").innerHTML= 'Updated Comment Successfully';
-						$(".comment").html(commentValue);	
+						$row.find(".comment").html(commentValue);	
 					}else{
 						document.getElementById("msg").innerHTML= 'Some error occured';
 					}
@@ -190,7 +190,7 @@
 				async: true,
 				cache: false
 			});
-			console.log(data);
+		//	console.log(data);
 		});
 	</script>
 
