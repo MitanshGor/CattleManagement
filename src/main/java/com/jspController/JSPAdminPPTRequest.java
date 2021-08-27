@@ -1,5 +1,8 @@
 package com.jspController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,12 +57,15 @@ public class JSPAdminPPTRequest {
 		PowerPointRequest request = powerPointRequest.getRequestByID(requestID);
 		UserBean user = userDao.getUserByID(request.getUserID());
 		NoteBean note = new NoteBean();
-		note.setContent("Your presentation request :"+request.getRequestQuery()+" updated");
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("title", "Royal Counselling App");
+		map.put("message", "Your presentation request :"+request.getRequestQuery()+" updated");
+		note.setContent("Your presentation request : "+request.getRequestQuery()+" updated");
+		note.setData(map);
 		note.setSubject("Royal Counselling App");
 		try {
 			firebaseMessagingService.sendNotification(note, user.getTokenID());
 		} catch (FirebaseMessagingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return String.valueOf(i);

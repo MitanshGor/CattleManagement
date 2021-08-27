@@ -37,6 +37,7 @@ public class FirebaseMessagingService {
                 .builder()
                 .setToken(token)
                 .setNotification(notification)
+                .putAllData(note.getData())
                 .build();
         return firebaseMessaging.send(message);
     }
@@ -53,6 +54,7 @@ public class FirebaseMessagingService {
                 .builder()
                 .addAllTokens(tokens)
                 .setNotification(notification)
+                .putAllData(note.getData())
                 .build();
         return firebaseMessaging.sendMulticast(message);
     }
