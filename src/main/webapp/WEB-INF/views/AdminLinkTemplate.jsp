@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <%@include file="HeaderFile.jsp"%>
-<title>Template Management</title>
+<title>Link Management</title>
 </head>
 <body>
 	<div class="dashboard-main-wrapper">

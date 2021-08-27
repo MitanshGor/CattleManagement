@@ -23,7 +23,7 @@
 	href="/resources/assets/vendor/datatables/css/fixedHeader.bootstrap4.css">
 	<%@include file="HeaderFile.jsp"%>
 	
-<title>Video Management</title>
+<title>Power Point Management</title>
 </head>
 <body>
 	<div class="dashboard-main-wrapper">

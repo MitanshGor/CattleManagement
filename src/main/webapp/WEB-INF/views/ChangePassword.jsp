@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Forgot Password</title>
+<title>Change Password</title>
 <link rel="stylesheet"
 	href="/resources/assets/vendor/bootstrap/css/bootstrap.min.css">
 <link href="/resources/assets/vendor/fonts/circular-std/style.css"

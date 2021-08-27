@@ -18,7 +18,7 @@
 <link rel="stylesheet"
 	href="/resources/assets/vendor/inputmask/css/inputmask.css" />
 <%@include file="HeaderFile.jsp"%>
-<title>Add Power Point</title>
+<title>Edit Power Point</title>
 <style>
 </style>
 </head>

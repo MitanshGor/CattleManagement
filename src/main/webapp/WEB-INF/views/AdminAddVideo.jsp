@@ -22,7 +22,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/assets/vendor/datatables/css/fixedHeader.bootstrap4.css">
 <%@include file="HeaderFile.jsp"%>
-<title>Add\Edit Seminar</title>
+<title>Add\Edit Video</title>
 <style>
 </style>
 </head>

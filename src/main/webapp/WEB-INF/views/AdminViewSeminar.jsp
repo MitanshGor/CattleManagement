@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Seminar Management</title>
+<title>View Seminar</title>
 <link rel="stylesheet"
 	href="/resources/assets/vendor/bootstrap/css/bootstrap.min.css">
 <link href="/resources/assets/vendor/fonts/circular-std/style.css"
