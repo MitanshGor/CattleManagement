@@ -3,6 +3,7 @@ package com.dao;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bean.SeminarBean;
 import com.bean.SeminarRegistrationUser;
+import com.bean.TokenBean;
 
 @Repository
 public class SeminarDao {
@@ -105,6 +107,18 @@ public class SeminarDao {
 		catch(Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	public ArrayList<String> getTokenListRegisteredUsers(int seminarID) {
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			List<TokenBean> listToken = smt.query("select * from usertable,seminarregistration where seminarregistration.userid=usertable.userid and seminarregistration.seminarid = ",new Object[] {seminarID},new int[] {java.sql.Types.BIGINT}, new BeanPropertyRowMapper<TokenBean>(TokenBean.class));
+			for(TokenBean t : listToken) {
+				list.add(t.getTokenID());
+			}
+			return list;
+		}catch(Exception e) {
+			return list;
 		}
 	}
 }

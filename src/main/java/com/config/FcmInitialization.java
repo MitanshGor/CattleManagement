@@ -27,7 +27,7 @@ public class FcmInitialization{
                 .builder()
                 .setCredentials(googleCredentials)
                 .build();
-        FirebaseApp app = FirebaseApp.initializeApp(firebaseOptions, "my-app");
+        FirebaseApp app = FirebaseApp.initializeApp(firebaseOptions, "royal-counselling-app");
         return FirebaseMessaging.getInstance(app);
     }
 }

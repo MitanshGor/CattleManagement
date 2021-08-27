@@ -1,9 +1,13 @@
 package com.jspController;
 
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,12 +23,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bean.AdminBean;
 import com.bean.LinkBean;
+import com.bean.NoteBean;
 import com.bean.SeminarBean;
 import com.bean.SeminarRegisteredUsers;
 import com.dao.AdminDao;
 import com.dao.LinkDao;
 import com.dao.SeminarDao;
 import com.dao.SeminarRegistrationDao;
+import com.google.firebase.messaging.FirebaseMessagingException;
+import com.service.FirebaseMessagingService;
 import com.service.GoogleDriveService;
 
 
@@ -47,6 +54,8 @@ public class JSPAdminController {
 	@Autowired
 	SeminarRegistrationDao seminarRegistrationDao;
 
+	@Autowired
+	FirebaseMessagingService firebaseMessagingService;
 	
 	
 	  @GetMapping("/adminDashboard") public String getAdminDashboard() { 
@@ -177,6 +186,35 @@ public class JSPAdminController {
 		else {
 			session.setAttribute("msg", "Some error occured");
 		}
+		return "redirect:/admin/seminarManagement";
+	}
+	@GetMapping("/sendReminder/{seminarID}")
+	public String sendReminder(@PathVariable("seminarID") int seminarID,HttpSession session) {
+		SeminarBean seminar = seminarDao.getSeminarByID(seminarID);		
+		LocalDateTime ct = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
+		LocalDateTime getSeminarStart = seminar.getSeminarStart();
+		Duration duration = Duration.between(ct,getSeminarStart);
+		ArrayList<String> list = seminarDao.getTokenListRegisteredUsers(seminarID);
+		NoteBean note = new NoteBean();
+		Map<String,String> map = new HashMap<String,String>();
+		
+		map.put("title", "Royal Counselling App");
+		map.put("message", "REMINDER!! "+seminar.getSeminarName()+"seminar will start after "+duration.toDays());
+		
+		note.setContent("");
+		note.setData(map);
+		note.setSubject("Royal Counselling App");
+	
+		if(list.size()>=1) {
+			try {
+				firebaseMessagingService.sendMultipleNotification(note, list);
+			} catch (FirebaseMessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		session.setAttribute("msg", "Reminder Send Successfully");		
 		return "redirect:/admin/seminarManagement";
 	}
 	@GetMapping("/editSeminar/{seminarID}")

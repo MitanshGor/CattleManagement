@@ -103,7 +103,9 @@
 													<a href="viewSeminar/${a.seminarID}"
 													class="btn bg-primary btn-xs text-white">View Seminar</a>&nbsp;&nbsp;&nbsp;&nbsp;
 													<a href="viewSeminarRegisteredUser/${a.seminarID}"
-													class="btn bg-danger btn-xs text-white">View Registered Users</a>
+													class="btn bg-danger btn-xs text-white">View Registered Users</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													<a href="sendReminder/${a.seminarID}"
+													class="btn bg-dark btn-xs text-white">Send Reminder</a>
 											</tr>
 										</c:forEach>
 									</tbody>
