@@ -12,6 +12,7 @@ public class SeminarBean {
 	String seminarName;
 	String seminarType;
 	
+	
 	float seminarFees;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
@@ -120,6 +121,10 @@ public class SeminarBean {
 	public void setAcceptingRegistration(boolean acceptingRegistration) {
 		this.acceptingRegistration = acceptingRegistration;
 	}
+
+
+
+
 
 	
 }

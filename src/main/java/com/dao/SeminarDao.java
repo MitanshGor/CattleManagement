@@ -112,12 +112,13 @@ public class SeminarDao {
 	public ArrayList<String> getTokenListRegisteredUsers(int seminarID) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			List<TokenBean> listToken = smt.query("select * from usertable,seminarregistration where seminarregistration.userid=usertable.userid and seminarregistration.seminarid = ",new Object[] {seminarID},new int[] {java.sql.Types.BIGINT}, new BeanPropertyRowMapper<TokenBean>(TokenBean.class));
+			List<TokenBean> listToken = smt.query("select * from usertable,seminarregistration where seminarregistration.userid=usertable.userid and seminarregistration.seminarid = ?",new Object[] {seminarID},new int[] {java.sql.Types.BIGINT}, new BeanPropertyRowMapper<TokenBean>(TokenBean.class));
 			for(TokenBean t : listToken) {
 				list.add(t.getTokenID());
 			}
 			return list;
 		}catch(Exception e) {
+			e.printStackTrace();
 			return list;
 		}
 	}

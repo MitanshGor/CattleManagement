@@ -204,7 +204,7 @@ public class JSPAdminController {
 		note.setContent("");
 		note.setData(map);
 		note.setSubject("Royal Counselling App");
-	
+
 		if(list.size()>=1) {
 			try {
 				firebaseMessagingService.sendMultipleNotification(note, list);
