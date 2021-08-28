@@ -99,6 +99,7 @@ public class TimeSlotDao {
 		boolean flag = true;
 		try {
 			smt.update("insert into personalcounsellingbooking(timeslotid,userid, requestedat) values(?,?,?)",pb.getTimeSlotID(),pb.getUserID(),pb.getRequestedAt());
+			smt.update("update timeslottable set request=true where timeslotid=?",pb.getTimeSlotID());
 		}
 		catch(Exception e) {
 			flag = false;
@@ -194,6 +195,6 @@ public class TimeSlotDao {
 	 
 	    Timestamp tSearchS = new Timestamp(cal.getTimeInMillis());
 	    Timestamp tSearchE = new Timestamp(cal1.getTimeInMillis());
-	    return smt.query("select * from timeslottable where starttime between ? and ? and booked = false",new Object[] {tSearchS,tSearchE}, new int[] {java.sql.Types.TIMESTAMP,java.sql.Types.TIMESTAMP}, new BeanPropertyRowMapper<TimeSlotBean>(TimeSlotBean.class));
+	    return smt.query("select * from timeslottable where starttime between ? and ? and booked = false and request = false",new Object[] {tSearchS,tSearchE}, new int[] {java.sql.Types.TIMESTAMP,java.sql.Types.TIMESTAMP}, new BeanPropertyRowMapper<TimeSlotBean>(TimeSlotBean.class));
 	}
 }

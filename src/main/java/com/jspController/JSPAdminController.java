@@ -200,8 +200,9 @@ public class JSPAdminController {
 		
 		map.put("title", "Royal Counselling App");
 		map.put("message", "REMINDER!! "+seminar.getSeminarName()+"seminar will start after "+duration.toDays());
+		map.put("click_action", "registerSeminar");
 		
-		note.setContent("");
+		note.setContent("REMINDER!! "+seminar.getSeminarName()+" seminar will start after "+duration.toDays());
 		note.setData(map);
 		note.setSubject("Royal Counselling App");
 
