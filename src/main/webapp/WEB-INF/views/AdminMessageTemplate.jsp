@@ -115,6 +115,7 @@
 												<li>Counselling ID : %(counselling id)</li>
 												<li>Counselling Date and Time: %(counselling date)</li>
 												<li>Counselling Link : %(link)</li>
+												<li>Counselling Type : %(type)</li>
 									
 										</ul>
 

@@ -157,6 +157,7 @@ public class JSPAdminPersonalCounsellingController {
 			values.put("user name", bookingTimeSlotBean.getFirstName() + " " + bookingTimeSlotBean.getLastName());
 			values.put("time slot id", String.valueOf(timeSlotBean.getTimeSlotID()));
 			values.put("counselling date",timeSlotBean.getStartTime().format(formatter));
+			values.put("type", bookingTimeSlotBean.getCounsellingType());
 			StrSubstitutor sub = new StrSubstitutor(values, "%(", ")");
 			message.setBody(sub.replace(message.getBody()));
 			message.setSubject(sub.replace(message.getSubject()));
