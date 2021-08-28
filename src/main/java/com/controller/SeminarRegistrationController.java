@@ -49,7 +49,7 @@ public class SeminarRegistrationController {
 
 	@PostMapping("/registerSeminar")
 	public ResponseBean<SeminarRegistrationBean> registerSeminar(SeminarRegistrationBean registerBean) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a");
 		ResponseBean<SeminarRegistrationBean> rb = new ResponseBean<SeminarRegistrationBean>();
 		System.out.println("Email ID : "+registerBean.getEmailID());
 		UserBean user = userDao.getUserByEmailID(registerBean.getEmailID());
