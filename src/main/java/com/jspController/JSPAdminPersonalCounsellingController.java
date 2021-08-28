@@ -64,8 +64,7 @@ public class JSPAdminPersonalCounsellingController {
 		try{
 			msg = (String)session.getAttribute("msg");
 		}
-		catch(Exception e) {
-			
+		catch(Exception e) {			
 		}
 		session.removeAttribute("msg");
 		model.addAttribute("msg",msg);
@@ -113,8 +112,7 @@ public class JSPAdminPersonalCounsellingController {
 			@PathVariable("timeSlotID") int timeSlotID) {
 		TimeSlotBean timeSlotBean = timeSlotDao.getTimeSlotByID(timeSlotID);
 		UserBean user = userDao.getUserByID(userID);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a");			
 		try {
 			int updateBookingRequestUser =  timeSlotDao.updateBookingRequestUser(personalCID,userID,timeSlotID);
 			int updateBookingRequest = timeSlotDao.updateBookingRequest(userID,timeSlotID);
@@ -135,8 +133,7 @@ public class JSPAdminPersonalCounsellingController {
 				message.setSubject(sub.replace(message.getSubject()));
 				whatsappService.sendMessage(user, message.getBody());
 				emailService.sendMessage(user,message.getBody(),message.getSubject());
-				session.setAttribute("msg", "Successfully Approved Appointment");	
-				
+				session.setAttribute("msg", "Successfully Approved Appointment");					
 			}else {
 				session.setAttribute("msg", "Some error Occured");				
 			}
@@ -151,8 +148,7 @@ public class JSPAdminPersonalCounsellingController {
 	public String cancelAppointment(@PathVariable("timeSlotID") int timeSlotID,HttpSession session) {
 		int i = 0;
 		TimeSlotBean timeSlotBean = timeSlotDao.getTimeSlotByID(timeSlotID);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a");
 		if(timeSlotBean.isBooked()) {
 			BookingTimeSlotBean bookingTimeSlotBean = timeSlotDao.getPersonalCounsellingBooked(timeSlotID);
 			UserBean user = userDao.getUserByID(bookingTimeSlotBean.getUserID());
@@ -166,12 +162,9 @@ public class JSPAdminPersonalCounsellingController {
 			message.setSubject(sub.replace(message.getSubject()));
 			whatsappService.sendMessage(user, message.getBody());
 			emailService.sendMessage(user,message.getBody(),message.getSubject());
-			i = timeSlotDao.cancelBookedAppointment(timeSlotID);
-			
-		}else {
-			
-			i = timeSlotDao.cancelNonBookedAppointment(timeSlotID);
-			
+			i = timeSlotDao.cancelBookedAppointment(timeSlotID);			
+		}else {			
+			i = timeSlotDao.cancelNonBookedAppointment(timeSlotID);			
 		}
 		if(i == 1) {
 			session.setAttribute("msg", "Deleted Appointment Successfully");
