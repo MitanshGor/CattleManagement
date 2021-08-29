@@ -1,9 +1,9 @@
 package com.jspController;
 
 import java.sql.Timestamp;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -191,18 +191,18 @@ public class JSPAdminController {
 	@GetMapping("/sendReminder/{seminarID}")
 	public String sendReminder(@PathVariable("seminarID") int seminarID,HttpSession session) {
 		SeminarBean seminar = seminarDao.getSeminarByID(seminarID);		
-		LocalDateTime ct = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
 		LocalDateTime getSeminarStart = seminar.getSeminarStart();
-		Duration duration = Duration.between(ct,getSeminarStart);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a");			
+		
 		ArrayList<String> list = seminarDao.getTokenListRegisteredUsers(seminarID);
 		NoteBean note = new NoteBean();
 		Map<String,String> map = new HashMap<String,String>();
 		
 		map.put("title", "Royal Counselling App");
-		map.put("message", "REMINDER!! "+seminar.getSeminarName()+"seminar will start after "+duration.toDays());
+		map.put("message", "This is a reminder that the seminar "+seminar.getSeminarName()+" you have registered for will commence on "+getSeminarStart.format(formatter)+". Please check the previous mail for the zoom link. Thank you.");
 		map.put("click_action", "registerSeminar");
 		
-		note.setContent("REMINDER!! "+seminar.getSeminarName()+" seminar will start after "+duration.toDays());
+		note.setContent( "This is a reminder that the seminar "+seminar.getSeminarName()+" you have registered for will commence on "+getSeminarStart.format(formatter)+". Please check the previous mail for the zoom link. Thank you.");
 		note.setData(map);
 		note.setSubject("Royal Counselling App");
 

@@ -5,6 +5,7 @@ import java.util.Map;
 public class NoteBean {
 String content;
 String subject;
+
 Map<String, String> data;
 
 public Map<String, String> getData() {

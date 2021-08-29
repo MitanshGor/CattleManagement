@@ -21,6 +21,7 @@ import com.bean.BookedTimeSlotBean;
 import com.bean.BookingTimeSlotBean;
 import com.bean.CounsellingCancellationMessageBean;
 import com.bean.CounsellingRegistrationBean;
+import com.bean.NoteBean;
 import com.bean.TimeSlotBean;
 import com.bean.UserBean;
 import com.dao.CounsellingCancellationMailDao;
@@ -28,7 +29,9 @@ import com.dao.CounsellingRegistrationMailDao;
 import com.dao.LinkDao;
 import com.dao.TimeSlotDao;
 import com.dao.UserDao;
+import com.google.firebase.messaging.FirebaseMessagingException;
 import com.service.EmailService;
+import com.service.FirebaseMessagingService;
 import com.service.WhatsappService;
 
 @Controller
@@ -57,6 +60,8 @@ public class JSPAdminPersonalCounsellingController {
 	EmailService emailService;
 	
 	
+	@Autowired
+	FirebaseMessagingService firebaseMessagingService;
 	
 	@GetMapping("/personalCounselling")
 	public String getPersonalCounselling(HttpSession session,Model model) {
@@ -135,6 +140,20 @@ public class JSPAdminPersonalCounsellingController {
 				message.setSubject(sub.replace(message.getSubject()));
 				whatsappService.sendMessage(user, message.getBody());
 				emailService.sendMessage(user,message.getBody(),message.getSubject());
+				NoteBean note = new NoteBean();
+				Map<String,String> map = new HashMap<String,String>();
+				map.put("title", "Royal Counselling App");
+				map.put("message", "Your counselling request for "+timeSlotBean.getStartTime().format(formatter)+" is confirmed. Mode of counselling "+timeSlotBean.getCounsellingType());
+				map.put("click_action", "counsellingRequest");
+				note.setContent("Your counselling request for "+timeSlotBean.getStartTime().format(formatter)+" is confirmed. Mode of counselling "+timeSlotBean.getCounsellingType());
+				note.setData(map);
+				note.setSubject("Royal Counselling App");
+				try {
+					firebaseMessagingService.sendNotification(note, user.getTokenID());
+				} catch (FirebaseMessagingException e) {
+					e.printStackTrace();
+				}
+
 				session.setAttribute("msg", "Successfully Approved Appointment");					
 			}else {
 				session.setAttribute("msg", "Some error Occured");				
@@ -166,6 +185,19 @@ public class JSPAdminPersonalCounsellingController {
 			message.setSubject(sub.replace(message.getSubject()));
 			whatsappService.sendMessage(user, message.getBody());
 			emailService.sendMessage(user,message.getBody(),message.getSubject());
+			NoteBean note = new NoteBean();
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("title", "Royal Counselling App");
+			map.put("message", "Your counselling request for "+timeSlotBean.getStartTime().format(formatter)+" is cancelled due to some unavoidable circumstances. Please reschedule using the application as per your convenience and available time slot. Sorry for inconvience.");
+			map.put("click_action", "counsellingRequest");
+			note.setContent("Your counselling request for "+timeSlotBean.getStartTime().format(formatter)+" is cancelled due to some unavoidable circumstances. Please reschedule using the application as per your convenience and available time slot. Sorry for inconvience.");
+			note.setData(map);
+			note.setSubject("Royal Counselling App");
+			try {
+				firebaseMessagingService.sendNotification(note, user.getTokenID());
+			} catch (FirebaseMessagingException e) {
+				e.printStackTrace();
+			}
 			i = timeSlotDao.cancelBookedAppointment(timeSlotID);			
 		}else {			
 			i = timeSlotDao.cancelNonBookedAppointment(timeSlotID);			

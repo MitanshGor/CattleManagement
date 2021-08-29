@@ -59,8 +59,9 @@ public class JSPAdminPPTRequest {
 		NoteBean note = new NoteBean();
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("title", "Royal Counselling App");
-		map.put("message", "Your presentation request :"+request.getRequestQuery()+" updated");
-		note.setContent("Your presentation request : "+request.getRequestQuery()+" updated");
+		map.put("message", "Your presentation request :"+request.getRequestQuery()+" updated. Please check your presentation from where you had requested for your presentation.");
+		map.put("click_action", "pptRequest");
+		note.setContent("Your presentation request : "+request.getRequestQuery()+" updated. Please check your presentation from where you had requested for your presentation.");
 		note.setData(map);
 		note.setSubject("Royal Counselling App");
 		try {
@@ -74,8 +75,23 @@ public class JSPAdminPPTRequest {
 	@GetMapping("closePPTRequestQuery/{requestID}")
 	public String closePPTRequestQuery(@PathVariable("requestID") int requestID,HttpSession session) {
 		int i = powerPointRequest.closePPTRequestQuery(requestID);
+		PowerPointRequest request = powerPointRequest.getRequestByID(requestID);
+		UserBean user = userDao.getUserByID(request.getUserID());
 		if(i == 1) {
-			session.setAttribute("msg", "Deactivated the query successfully");				
+			session.setAttribute("msg", "Deactivated the query successfully");			
+			NoteBean note = new NoteBean();
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("title", "Royal Counselling App");
+			map.put("message", "Your presentation request :"+request.getRequestQuery()+" is closed by Admin. Please check your presentation from where you had requested for your presentation.");
+			map.put("click_action", "pptRequest");
+			note.setContent("Your presentation request :"+request.getRequestQuery()+" is closed by Admin. Please check your presentation from where you had requested for your presentation.");
+			note.setData(map);
+			note.setSubject("Royal Counselling App");
+			try {
+				firebaseMessagingService.sendNotification(note, user.getTokenID());
+			} catch (FirebaseMessagingException e) {
+				e.printStackTrace();
+			}
 		}
 		else {
 			session.setAttribute("msg", "Some error occured");

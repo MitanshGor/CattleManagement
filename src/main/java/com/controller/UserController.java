@@ -58,11 +58,11 @@ public class UserController {
 	}
 	
 	@PostMapping("/signUpUser")
-	public ResponseBean<UserBean> signUpUser(UserBean userBean){
+	public ResponseBean<UserBean> signUpUser(UserBean userBean,@RequestParam("tokenID") String tokenID){
 		ResponseBean<UserBean> rb = new ResponseBean<UserBean>(); 
 		rb.setData(userBean);
 		if(userDao.checkDuplicateEmail(userBean.getEmailID().trim())){
-			int userID = (int)userDao.insertUser(userBean);
+			int userID = (int)userDao.insertUser(userBean,tokenID);
 			int i = 0;
 			if(userID !=0) {
 				userBean.setUserID(userID);

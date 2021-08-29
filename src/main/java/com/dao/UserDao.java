@@ -45,7 +45,7 @@ public class UserDao {
 			return true;
 	}
 
-	public long insertUser(final UserBean userBean) {
+	public long insertUser(final UserBean userBean,final String tokenID) {
 		long userID = 0;
 
 		GeneratedKeyHolder holder = new GeneratedKeyHolder();
@@ -57,7 +57,7 @@ public class UserDao {
 				@Override
 				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 					PreparedStatement psmt = con.prepareStatement("insert into usertable(emailid,password,"
-							+ "firstname,lastname,phonenumber,createdat) values(?,?,?,?,?,?)",java.sql.Statement.RETURN_GENERATED_KEYS);
+							+ "firstname,lastname,phonenumber,createdat,tokenid) values(?,?,?,?,?,?,?)",java.sql.Statement.RETURN_GENERATED_KEYS);
 					psmt.setString(1, userBean.getEmailID());
 					psmt.setString(2, userBean.getPassword());
 					String firstName = userBean.getFirstName().substring(0,1).toUpperCase();
@@ -70,6 +70,7 @@ public class UserDao {
 					psmt.setString(4, lastName+remainLastName);
 					psmt.setString(5, userBean.getPhoneNumber());
 					psmt.setTimestamp(6, ctim);
+					psmt.setString(7, tokenID);
 					return psmt;
 				}
 			},holder);	

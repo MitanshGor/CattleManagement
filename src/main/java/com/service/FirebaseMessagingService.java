@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.bean.NoteBean;
 import com.google.firebase.messaging.Notification;
 import com.google.firebase.messaging.BatchResponse;
+import com.google.firebase.messaging.FcmOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
@@ -31,13 +32,14 @@ public class FirebaseMessagingService {
                 .builder()
                 .setTitle(note.getSubject())
                 .setBody(note.getContent())
+                
                 .build();
 
+        
         Message message = Message
                 .builder()
                 .setToken(token)
-                .setNotification(notification)
-                .putAllData(note.getData())
+                .putAllData(note.getData())                
                 .build();
         return firebaseMessaging.send(message);
     }
@@ -53,7 +55,6 @@ public class FirebaseMessagingService {
         MulticastMessage message = MulticastMessage
                 .builder()
                 .addAllTokens(tokens)
-                .setNotification(notification)
                 .putAllData(note.getData())
                 .build();
         return firebaseMessaging.sendMulticast(message);
