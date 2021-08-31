@@ -19,7 +19,7 @@ public class FcmInitialization{
 
     @Bean
     FirebaseMessaging firebaseMessaging() throws IOException {
-        File initialFile = new File("royal-counselling-app-firebase-adminsdk-9mn28-e7f7fadfd9.json");
+        File initialFile = new File("royal-application-5f683-firebase-adminsdk-s05x8-866deae976.json");
         InputStream targetStream = new FileInputStream(initialFile);
         GoogleCredentials googleCredentials = GoogleCredentials
                 .fromStream(targetStream);
@@ -27,7 +27,7 @@ public class FcmInitialization{
                 .builder()
                 .setCredentials(googleCredentials)
                 .build();
-        FirebaseApp app = FirebaseApp.initializeApp(firebaseOptions, "royal-counselling-app");
+        FirebaseApp app = FirebaseApp.initializeApp(firebaseOptions, "royal-application");
         return FirebaseMessaging.getInstance(app);
     }
 }

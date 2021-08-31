@@ -23,7 +23,6 @@ import com.dao.SeminarRegistrationDao;
 import com.dao.SeminarRegistrationMailDao;
 import com.dao.UserDao;
 import com.service.EmailService;
-//import com.service.WhatsappService;
 import com.service.WhatsappService;
 
 @RestController
@@ -47,6 +46,9 @@ public class SeminarRegistrationController {
 	@Autowired
 	SeminarRegistrationMailDao seminarMailDao;
 
+	/*
+	 * @Autowired MessageService messageService;
+	 */
 	@PostMapping("/registerSeminar")
 	public ResponseBean<SeminarRegistrationBean> registerSeminar(SeminarRegistrationBean registerBean) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a");
@@ -81,6 +83,8 @@ public class SeminarRegistrationController {
 
 					emailService.sendMessage(user, message.getBody(),message.getSubject());
 					whatsappService.sendMessage(user,message.getBody());
+				//	messageService.sendSms(user, message.getBody());
+					
 					rb.setStatus(200);
 				} else {
 					rb.setMessage("Registeration Unsuccessful");

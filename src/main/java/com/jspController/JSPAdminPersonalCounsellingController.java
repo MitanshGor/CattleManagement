@@ -59,6 +59,9 @@ public class JSPAdminPersonalCounsellingController {
 	@Autowired
 	EmailService emailService;
 	
+	/*
+	 * @Autowired MessageService messageService;
+	 */
 	
 	@Autowired
 	FirebaseMessagingService firebaseMessagingService;
@@ -139,6 +142,7 @@ public class JSPAdminPersonalCounsellingController {
 				message.setBody(sub.replace(message.getBody()));
 				message.setSubject(sub.replace(message.getSubject()));
 				whatsappService.sendMessage(user, message.getBody());
+			//	messageService.sendSms(user, message.getBody());
 				emailService.sendMessage(user,message.getBody(),message.getSubject());
 				NoteBean note = new NoteBean();
 				Map<String,String> map = new HashMap<String,String>();
@@ -184,6 +188,7 @@ public class JSPAdminPersonalCounsellingController {
 			message.setBody(sub.replace(message.getBody()));
 			message.setSubject(sub.replace(message.getSubject()));
 			whatsappService.sendMessage(user, message.getBody());
+		//	messageService.sendSms(user, message.getBody());
 			emailService.sendMessage(user,message.getBody(),message.getSubject());
 			NoteBean note = new NoteBean();
 			Map<String,String> map = new HashMap<String,String>();
