@@ -91,49 +91,58 @@
 						</div>
 					</div>
 					<div class="col-6 d-flex justify-content-end">
-						<button class="btn bg-dark text-white open">Add Admin</button>
+						<button class="btn  text-white open" style="background-color:#1a3f13;">Add Cattle</button>
 					</div>
 				</div>
 							<div class="popup-overlay">
-				<div class="popup-content">
-					<i class="fas fa-window-close close" style="float: right"></i><br>
-					<br>
-					<form id="addAdmin" action="addAdmin" method="post">
-						<div class="card">
-							<div class="card-header">
-								<h3 class="mb-1">Admin Signup Form</h3>
-								<p>Please Enter Admin Information</p>
-							</div>
-							<div class="card-body">
-								<div class="form-group">
-									<input class="form-control form-control-lg" type="text"
-										name="name" id="name" placeholder="Admin Name"
-										autocomplete="off" onkeyup="checkSpace(this)" required>
-
-								</div>
-								<div class="form-group">
-									<input class="form-control form-control-lg" type="email"
-										name="emailID" required placeholder="E-mail"
-										autocomplete="off">
-								</div>
-								<div class="form-group">
-									<input class="form-control form-control-lg" id="pass1"
-										name="password" autocomplete="off" type="password"
-										placeholder="Password" required>
-								</div>
-								<div class="form-group">
-									<input class="form-control form-control-lg"
-										placeholder="Confirm" autocomplete="off" oninput="check(this)"
-										required>
-								</div>
-								<div class="form-group pt-2">
-									<button class="btn btn-block btn-primary" type="submit">Register
-										Admin</button>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
+															<div class="popup-content">
+																<i class="fas fa-window-close close" style="float: right"></i><br>
+																<br>
+																<form id="addAdmin" action="addAdmin" method="post">
+																	<div class="card">
+																		<div class="card-header">
+																			<h3 class="mb-1">Create Cattle</h3>
+																			<p></p>
+																		</div>
+																		<div class="card-body">
+																			
+																				<div class="form-group"> <Label for="pass1" style="float: left;">Body Rate</Label>
+																				 <input type="range" min="1" max="6" name="range-inline" required> 
+																			</div>
+																			
+																			
+																			<div class="form-group "><Label for="pass1" style="float: left;">Cattle Type</Label>
+																			 <label class="custom-control custom-radio custom-control-inline">
+								                                                <input type="radio" name="radio-inline" checked="" class="custom-control-input"><span class="custom-control-label">Cow</span>
+								                                            </label>
+								                                            <label class="custom-control custom-radio custom-control-inline">
+								                                                <input type="radio" name="radio-inline" class="custom-control-input"><span class="custom-control-label">Bull</span>
+								                                            </label>
+								                                            
+																			</div>
+																			<div class="form-group"> <Label for="pass1" style="float: left;">Birth Date</Label>
+																				<input class="form-control form-control-lg" id="pass1"
+																					name="password" autocomplete="off" type="date"
+																					placeholder="Birth Date" required>
+																			</div>
+																			<div class="form-group"><Label for="pass1" style="float: left;">Purchase Date</Label>
+																				<input class="form-control form-control-lg"
+																					placeholder="Date" autocomplete="off" oninput="check(this)"
+																					required>
+																			</div>
+																				<div class="form-group"><Label for="pass1" style="float: left;">Purchase Price</Label>
+																				<input class="form-control form-control-lg" type="number"
+																					placeholder="Purchase Price" autocomplete="off" oninput="check(this)"
+																					required>
+																			</div>
+																			<div class="form-group pt-2">
+																				<button class="btn btn-block btn-primary" type="submit">Register
+																					Cattle</button>
+																			</div>
+																		</div>
+																	</div>
+																</form>
+															</div>
 			</div>
 				<br>
 				<div class="row">
@@ -145,10 +154,12 @@
 									<table class="table table-striped table-bordered first">
 										<thead>
 											<tr>
-												<th>Admin ID</th>
-												<th>Admin Name</th>
-												<th>Email ID</th>
-												<th>Create At</th>
+												<th>Cattle Id</th>
+												<th>Cattle Type</th>
+												<th>Purchase Date</th>
+												<th>Birth Date</th>
+												<th>Purchase Price</th>
+												<th>Body Scale</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -159,9 +170,14 @@
 													<th>${a.name }</th>
 													<th>${a.emailID}</th>
 													<th>${a.createdAt }</th>
-													<th><a href="deleteAdmin/${a.adminID}" class="btn bg-dark text-white">Delete Admin</a>
+													<th>${a.createdAt }</th>
+													<th>${a.createdAt }</th>
+													
+													<th><a href="deleteAdmin/${a.adminID}" class="btn  text-white" style="background-color:#1a3f13;">Delete Cattle</a>
+														<a href="deactivateUser/" style="background-color:#1a3f13;" class="btn  text-white open">Vaccine Details</a>
+												
+													</th>
 												</tr>
-
 											</c:forEach>
 
 										</tbody>
@@ -172,9 +188,6 @@
 					</div>
 				</div>
 			</div>
-
-
-
 		</div>
 	</div>
 	<%@include file="AdminFooter.jsp"%>

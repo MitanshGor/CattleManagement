@@ -5,7 +5,7 @@
 <div class="dashboard-header">
 	<nav class="navbar navbar-expand-lg bg-white fixed-top">
 		<a class="navbar-brand" href="adminManagment"><img
-			src='/resources/assets/images/LOGO_ROYAL.png' width='128px'></a>
+			src='/resources/assets/images/LOGO_COW.png' width='65px'><span style="color: maroon;" class="h5 font-weight-bold">Cattle Management</span></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -21,8 +21,8 @@
 						class="user-avatar-md rounded-circle"></a>
 					<div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
 						aria-labelledby="navbarDropdownMenuLink2">
-						<div class="nav-user-info">
-							<h5 class="mb-0 text-white nav-user-name">${sessionScope.adminObject.name }</h5>
+						<div class="nav-user-info" style="background-color:maroon;">
+							<h5 class="mb-0 text-white nav-user-name" >${sessionScope.adminObject.name}</h5>
 						</div>
 						<a class="dropdown-item" href="changePassword"><i class="fas fa-user mr-2"></i>Change
 							Password</a> <a class="dropdown-item" href="logoutAdmin"><i

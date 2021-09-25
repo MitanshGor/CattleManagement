@@ -55,7 +55,7 @@
 						</div>
 					</div>
 					<div class="col-6 d-flex justify-content-end">
-						<a href="addSeminar" class="btn bg-dark text-white open">Add
+						<a href="addSeminar" class="btn  text-white open" style="background-color:#1a3f13;" >Add
 							Seminar</a>
 					</div>
 				</div>
@@ -73,17 +73,17 @@
 									style="width: 100%">
 									<thead>
 										<tr>
-											<th>Seminar ID</th>
-											<th>Seminar Title</th>
-											<th>Seminar Type</th>
-											<th>Seminar Start Date</th>
-											<th>Seminar End Date</th>
+											<th>Cattle Id</th>
+											<th>Vaccine Name</th>
+											<th>To Be Given</th>
+											<th>Vaccine Date</th>
+											<th>Status</th>
 											
-											<th>Registration Start Date</th>
+										<!-- 	<th>Registration Start Date</th>
 											<th>Registration End Date</th>
 											<th>Accepting Registration</th>
 											
-											<th>Action</th>
+											<th>Action</th> -->
 										</tr>
 									</thead>
 									<tbody>
@@ -95,17 +95,21 @@
 												<th>${a.seminarType}</th>
 												<th>${a.seminarStart }</th>
 												<th>${a.seminarEnd}</th>
-												<th>${a.seminarRegistrationStart }</th>
+<%-- 												<th>${a.seminarRegistrationStart }</th>
 												<th>${a.seminarRegistrationEnd}</th>
 												<th>${a.acceptingRegistration ? 'Yes' : 'No'}</th>
-												<th><a href="editSeminar/${a.seminarID}"
-													class="btn bg-dark btn-xs text-white">Edit Seminar</a>&nbsp;&nbsp;&nbsp;&nbsp;
+												<th>
+												<a href="editSeminar/${a.seminarID}"
+													class="btn  mt-1  btn-xs text-white" style="background-color:#1a3f13;">Edit Seminar</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													
 													<a href="viewSeminar/${a.seminarID}"
-													class="btn bg-primary btn-xs text-white">View Seminar</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													class="btn  mt-1  btn-xs text-white" style="background-color:#1a3f13;">View Seminar</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													
 													<a href="viewSeminarRegisteredUser/${a.seminarID}"
-													class="btn bg-danger btn-xs text-white">View Registered Users</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													class="btn  mt-1  btn-xs text-white" style="background-color:#1a3f13;">View Registered Users</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													
 													<a href="sendReminder/${a.seminarID}"
-													class="btn bg-dark btn-xs text-white">Send Reminder</a>
+													class="btn mt-1 btn-xs text-white" style="background-color:#1a3f13;">Send Reminder</a></th> --%>
 											</tr>
 										</c:forEach>
 									</tbody>

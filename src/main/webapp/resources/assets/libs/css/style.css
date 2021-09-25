@@ -1913,7 +1913,6 @@ Sidebar Page Navigations
 }
 
 .dropdown-item:hover {
-    color: #5969ff;
     background: #efeff6;
 }
 
@@ -4526,11 +4525,13 @@ Pills vertical
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(230, 230, 242, .5);
+    background-color: #EEF2DB;
+    color: #FFFDD0;
 }
 
 .table-hover tbody tr:hover {
     background-color: rgba(230, 230, 242, .5);
+    color: #FFFDD0;
 }
 
 

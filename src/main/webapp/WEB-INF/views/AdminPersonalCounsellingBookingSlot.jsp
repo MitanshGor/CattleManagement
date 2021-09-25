@@ -103,7 +103,7 @@
 												<th>${a.phoneNumber }</th>
 											
 												<th><a href="approveAppointment/${a.userID }/${a.personalCID}/${a.timeSlotID}"
-													class=" btn bg-dark text-white open">Approve Appointment</a></th>
+													class=" btn  text-white open" style="background-color:#1a3f13;">Approve Appointment</a></th>
 											</tr>
 										</c:forEach>
 									</tbody>

@@ -85,7 +85,7 @@
 												<th>${a.link }</th>
 												<th>${a.counsellingType}</th>
 												<th>
-													<a href="viewUser/${a.userID }" class=" btn bg-dark text-white open">View User</a>
+													<a href="viewUser/${a.userID }" class=" btn  text-white open" style="background-color:#1a3f13;">View User</a>
 												</th>
 											</tr>
 										</c:forEach>

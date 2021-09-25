@@ -85,7 +85,7 @@
 										<tbody>
 											<c:forEach items="${requestList}" var="a">
 												<tr>
-													<th class="id">${a.requestID }</th>
+													<th class="id" >${a.requestID }</th>
 													<th>${a.firstName} ${a.lastName}</th>
 													<th>${a.emailID}</th>
 													<th>${a.requestQuery}</th>

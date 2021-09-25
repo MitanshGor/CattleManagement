@@ -55,7 +55,7 @@
 								<form id="validationform" action="addPowerPointPresentation" method="post"
 									enctype="multipart/form-data">
 									<div class="form-group row">
-										<label class="col-12 col-sm-3 col-form-label text-sm-right">File Name
+										<label class="col-12 col-sm-3 col-form-label text-sm-right">Mother Id
 											</label>
 										<div class="col-12 col-sm-8 col-lg-6">
 											<input type="text" placeholder="File Name"
@@ -64,10 +64,21 @@
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="col-12 col-sm-3 col-form-label text-sm-right">Presentation</label>
+										<label class="col-12 col-sm-3 col-form-label text-sm-right">Father Id
+											</label>
 										<div class="col-12 col-sm-8 col-lg-6">
-											<input type="file" placeholder=""
-												class="form-control" name="presentationFile" required>
+											<input type="text" placeholder="File Name"
+												class="form-control" name="fileName"
+												value="${powerPoint.fileName}" required>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-12 col-sm-3 col-form-label text-sm-right">Expected Date
+											</label>
+										<div class="col-12 col-sm-8 col-lg-6">
+											<input type="date" placeholder="File Name"
+												class="form-control" name="fileName"
+												value="${powerPoint.fileName}" required>
 										</div>
 									</div>
 								
@@ -84,7 +95,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	<%@include file="AdminFooter.jsp"%>

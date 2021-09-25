@@ -59,7 +59,7 @@
 					</div>
 					<div class="col-6 d-flex justify-content-end">
 						<a href="addPowerPointPresentation"
-							class="btn bg-dark text-white open">Add Presentation</a>
+							class="btn  text-white open" style="background-color:#1a3f13;">Add Breeding Detail</a>
 					</div>
 				</div>
 				<br>
@@ -74,11 +74,10 @@
 									<table id="example" class="table table-striped table-bordered second" style="width: 100%">
 										<thead>
 											<tr>
-												<th>Presentation ID</th>
-												<th>File Name</th>
-												<th>Power Point URL</th>
-												<th>Is Active</th>
-												<th>Added At</th>
+												<th>Breeding Id</th>
+												<th>Mother Id</th>
+												<th>Father Id</th>
+												<th>Expected Delivery Date</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -87,24 +86,11 @@
 												<tr>
 													<th>${a.pptID }</th>
 													<th>${a.fileName}</th>
-													<th><a href="${a.pptURL}" target="_blank"
-														rel="noopener noreferrer"
-														class="btn bg-dark btn-xs text-white">View PPT</a></th>
-													<th>${a.pptActive ? 'Yes' : 'No'}</th>
-													<th>${a.addedAt}</th>
-													<th><a href="editPPT/${a.pptID}"
-														class="btn bg-dark btn-xs text-white">Edit PPT</a> 
-														
-														<c:if
-															test="${a.pptActive}">
-															<a href="deactivatePPT/${a.pptID}"
-																class="btn bg-danger btn-xs text-white">Deactivate
-																PPT</a>
-														</c:if> <c:if test="${!a.pptActive}">
-															<a href="activatePPT/${a.pptID}"
-																class="btn bg-danger btn-xs text-white">Activate PPT</a>
-														</c:if> <a href="manageKeywords/${a.pptID}"
-														class="btn bg-dark btn-xs text-white">Manage Keyword</a>
+													<th>${a.fileName}</th>
+													<th>${a.fileName}</th>
+													<th><a href="deactivateUser" style="background-color:#1a3f13;" class="btn  text-white open">Delete</a> 
+												</th>
+												
 												</tr>
 											</c:forEach>
 										</tbody>
